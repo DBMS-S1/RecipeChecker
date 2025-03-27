@@ -72,4 +72,3 @@ const recipes = [
     `;
     recipeDetails.style.display = 'block';
   }
-  
