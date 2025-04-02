@@ -88,3 +88,12 @@ function displayRecipe(recipe) {
   `;
   recipeDetails.style.display = 'block';
 }
+
+// Dropdown functionality
+document.querySelector('.dropdown').addEventListener('mouseenter', function() {
+  document.querySelector('.dropdown-content').classList.remove('hidden');
+});
+
+document.querySelector('.dropdown').addEventListener('mouseleave', function() {
+  document.querySelector('.dropdown-content').classList.add('hidden');
+});

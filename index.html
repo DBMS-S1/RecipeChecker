@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Recipe, Great Recipe</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -15,6 +15,31 @@
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex space-x-4">
                 <a href="#" class="text-lg font-semibold">Recipe Search</a>
+                <div class="dropdown">
+                    <a href="#" class="text-lg font-semibold">Categories</a>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-apple-alt mr-2"></i> Produce</a>
+                        <a href="#"><i class="fas fa-bread-slice mr-2"></i> Bread Recipes</a>
+                        <a href="#"><i class="fas fa-hamburger mr-2"></i> Appetizers and Snacks</a>
+                        <a href="#"><i class="fas fa-utensils mr-2"></i> Dinner Recipes</a>
+                        <a href="#"><i class="fas fa-clipboard-list mr-2"></i> Ingredients</a>
+                        <a href="#"><i class="fas fa-flag mr-2"></i> Filipino Recipes</a>
+                        <a href="#"><i class="fas fa-heartbeat mr-2"></i> Healthy Recipes</a>
+                        <a href="#"><i class="fas fa-coffee mr-2"></i> Breakfast and Brunch</a>
+                        <a href="#"><i class="fas fa-birthday-cake mr-2"></i> Desserts</a>
+                        <a href="#"><i class="fas fa-drumstick-bite mr-2"></i> Main Dishes</a>
+                        <a href="#"><i class="fas fa-carrot mr-2"></i> Side Dishes</a>
+                        <a href="#"><i class="fas fa-star mr-2"></i> Trusted Brands</a>
+                        <a href="#"><i class="fas fa-calendar-alt mr-2"></i> Holidays and Events</a>
+                        <a href="#"><i class="fas fa-glass-cheers mr-2"></i> Drinks</a>
+                        <a href="#"><i class="fas fa-globe-americas mr-2"></i> Cuisines</a>
+                        <a href="#"><i class="fas fa-fire mr-2"></i> BBQ & Grilling</a>
+                        <a href="#"><i class="fas fa-fish mr-2"></i> Seafood Recipes</a>
+                        <a href="#"><i class="fas fa-soup mr-2"></i> Soups</a>
+                        <a href="#"><i class="fas fa-pasta mr-2"></i> Pasta and Noodles</a>
+                        <a href="#"><i class="fas fa-briefcase mr-2"></i> Lunch Recipes</a>
+                    </div>
+                </div>
                 <a href="#" class="text-lg">Starred Recipes</a>
                 <a href="#" class="text-lg">Meal Planner</a>
                 <a href="#" class="text-lg">Share Recipe</a>
@@ -27,39 +52,47 @@
         <h1 class="text-4xl font-bold mb-4">Good Recipe, Great Recipe</h1>
         <p class="text-lg mb-8">Unleash your culinary creativity! Explore delicious recipes, connect with passionate cooks, and discover mouthwatering videos and tips based on the food you love!</p>
 
-       <!-- Recipe Search Section -->
-<div class="bg-white p-6 rounded shadow-md w-full md:w-2/3 lg:w-1/2 mx-auto">
-    <div class="text-center">
-        <p class="mb-4 text-xl font-semibold">To begin, enter the ingredients you have nearby.</p>
-        <div class="flex items-center justify-center mb-6">
-            <span class="text-green-500 mr-2"><i class="fas fa-check-circle"></i></span>
-            <input type="text" id="included-ingredients" placeholder="e.g. tomatoes" class="border rounded p-2 w-full max-w-md">
+        <!-- Recipe Search Section -->
+        <div class="bg-white p-6 rounded shadow-md w-full md:w-2/3 lg:w-1/2 mx-auto">
+            <div class="text-center">
+                <p class="mb-4 text-xl font-semibold">To begin, enter the ingredients you have.</p>
+                <div class="mb-6">
+                    <span class="text-green-500 mr-2"><i class="fas fa-check-circle"></i></span>
+                    <input type="text" id="included-ingredients" placeholder="e.g. tomatoes" class="border rounded p-2 w-full max-w-md">
+                </div>
+                <p class="mb-4 text-xl font-semibold">Are there ingredients you do <span class="font-bold">not</span> want to cook with?</p>
+                <div class="mb-6">
+                    <span class="text-red-500 mr-2"><i class="fas fa-times-circle"></i></span>
+                    <input type="text" id="excluded-ingredients" placeholder="e.g. mushrooms" class="border rounded p-2 w-full max-w-md">
+                </div>
+                
+                <!-- Serving Size -->
+                <label for="serving-size" class="text-lg">Serving Size:</label>
+                <br>
+                <select id="serving-size" class="border rounded p-2 mb-4 w-full max-w-md">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <br>
+                <!-- Max Preparation Time -->
+                <label for="prep-time" class="text-lg">Max Preparation Time (minutes):</label>
+                <input type="number" id="prep-time" class="border rounded p-2 mb-4 w-full max-w-md" placeholder="e.g. 30">
+                <br>
+                <!-- Max Cooking Time -->
+                <label for="cook-time" class="text-lg">Max Cooking Time (minutes):</label>
+                <input type="number" id="cook-time" class="border rounded p-2 mb-4 w-full max-w-md" placeholder="e.g. 30">
+                <br>
+                <button id="find-recipes" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">Find recipes!</button>
+                <div id="recipe-details" class="mt-6" style="display: none;"></div>
+            </div>
         </div>
-        <p class="mb-4 text-xl font-semibold">Are there ingredients you do <span class="font-bold">not</span> want to cook with?</p>
-        <div class="flex items-center justify-center mb-6">
-            <span class="text-red-500 mr-2"><i class="fas fa-times-circle"></i></span>
-            <input type="text" id="excluded-ingredients" placeholder="e.g. mushrooms" class="border rounded p-2 w-full max-w-md">
-        </div>
-        <label for="serving-size" class="text-lg">Serving Size:</label>
-        <select id="serving-size" class="border rounded p-2 mb-4 w-full max-w-md">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-        </select>
-        <label for="prep-time" class="text-lg">Max Preparation Time (minutes):</label>
-        <input type="number" id="prep-time" class="border rounded p-2 mb-4 w-full max-w-md" placeholder="e.g. 30">
-        <label for="cook-time" class="text-lg">Max Cooking Time (minutes):</label>
-        <input type="number" id="cook-time" class="border rounded p-2 mb-4 w-full max-w-md" placeholder="e.g. 30">
-        
-        <button id="find-recipes" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">Find recipes!</button>
-        <div id="recipe-details" class="mt-6" style="display: none;"></div>
     </div>
-</div>
 
     <!-- Footer -->
     <footer class="bg-gray-200 text-center py-4 mt-8">

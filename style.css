@@ -1,31 +1,48 @@
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9;
-  color: #333;
+/* Dropdown Menu Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
-h1 {
-  margin: 0;
-}
-
-#recipe-details {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
+.dropdown-content {
+  display: none; /* Hide dropdown by default */
+  position: absolute;
   background-color: white;
-  display: none;
+  width: 1100px; /* Set a fixed width for the dropdown */
+  padding: 20px; /* Add padding for a spacious look */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 8px; /* Optional: Add rounded corners */
+  grid-template-columns: repeat(4, 1fr); /* Four columns */
+  display: grid; /* Use grid layout */
 }
 
-button {
-  background-color: #2e3a87;
-  color: white;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
+.dropdown:hover .dropdown-content {
+  display: grid; /* Show as grid when hovered */
 }
 
-button:hover {
-  background-color: #4c5ac1;
+.dropdown-content a {
+  color: black; /* Text color for dropdown items */
+  padding: 12px 16px; /* Padding for dropdown items */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Make items block elements */
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1; /* Change background on hover */
+}
+
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif; /* Set font for the body */
+}
+
+h1, h2, h3 {
+  margin: 0; /* Remove default margin */
+}
+
+.container {
+  max-width: 1200px; /* Set max width for container */
+  margin: 0 auto; /* Center the container */
+  padding: 0 20px; /* Add horizontal padding */
 }
