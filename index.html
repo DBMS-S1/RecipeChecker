@@ -10,40 +10,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="bg-white text-center font-roboto">
+
+<div id="modal-wrapper" class="modal">
+  <form class="modal-content animate">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+      <img src="" alt="Avatar" class="avatar">   <!--add your picture link-->
+      <h1 style="text-align:center">Login Page</h1>
+    </div>
+
+    <div class="container">
+      <input type="text" placeholder="Enter Username" name="uname">
+      <input type="password" placeholder="Enter Password" name="psw">        
+      <button type="submit">Login</button>
+      <input type="checkbox" style="margin:26px 30px;"> Remember me      
+      <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+    </div>
+    
+  </form>
+  
+</div>
+    
     <!-- Navigation Bar -->
     <nav class="bg-red-700 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex space-x-4">
                 <a href="#" class="text-lg font-semibold">Recipe Search</a>
-                <div class="dropdown">
+                <div class="dropdown relative">
                     <a href="#" class="text-lg font-semibold">Categories</a>
-                    <div class="dropdown-content">
-                        <a href="#"><i class="fas fa-apple-alt mr-2"></i> Produce</a>
-                        <a href="#"><i class="fas fa-bread-slice mr-2"></i> Bread Recipes</a>
-                        <a href="#"><i class="fas fa-hamburger mr-2"></i> Appetizers and Snacks</a>
-                        <a href="#"><i class="fas fa-utensils mr-2"></i> Dinner Recipes</a>
-                        <a href="#"><i class="fas fa-clipboard-list mr-2"></i> Ingredients</a>
-                        <a href="#"><i class="fas fa-flag mr-2"></i> Filipino Recipes</a>
-                        <a href="#"><i class="fas fa-heartbeat mr-2"></i> Healthy Recipes</a>
-                        <a href="#"><i class="fas fa-coffee mr-2"></i> Breakfast and Brunch</a>
-                        <a href="#"><i class="fas fa-birthday-cake mr-2"></i> Desserts</a>
-                        <a href="#"><i class="fas fa-drumstick-bite mr-2"></i> Main Dishes</a>
-                        <a href="#"><i class="fas fa-carrot mr-2"></i> Side Dishes</a>
-                        <a href="#"><i class="fas fa-star mr-2"></i> Trusted Brands</a>
-                        <a href="#"><i class="fas fa-calendar-alt mr-2"></i> Holidays and Events</a>
-                        <a href="#"><i class="fas fa-glass-cheers mr-2"></i> Drinks</a>
-                        <a href="#"><i class="fas fa-globe-americas mr-2"></i> Cuisines</a>
-                        <a href="#"><i class="fas fa-fire mr-2"></i> BBQ & Grilling</a>
-                        <a href="#"><i class="fas fa-fish mr-2"></i> Seafood Recipes</a>
-                        <a href="#"><i class="fas fa-soup mr-2"></i> Soups</a>
-                        <a href="#"><i class="fas fa-pasta mr-2"></i> Pasta and Noodles</a>
-                        <a href="#"><i class="fas fa-briefcase mr-2"></i> Lunch Recipes</a>
+                    <div class="dropdown-content absolute hidden bg-white text-black shadow-lg">
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-apple-alt mr-2"></i> Produce</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-bread-slice mr-2"></i> Bread Recipes</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-hamburger mr-2"></i> Appetizers and Snacks</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-utensils mr-2"></i> Dinner Recipes</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-clipboard-list mr-2"></i> Ingredients</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-flag mr-2"></i> Filipino Recipes</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-heartbeat mr-2"></i> Healthy Recipes</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-coffee mr-2"></i> Breakfast and Brunch</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-birthday-cake mr-2"></i> Desserts</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-drumstick-bite mr-2"></i> Main Dishes</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-carrot mr-2"></i> Side Dishes</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-star mr-2"></i> Trusted Brands</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-calendar-alt mr-2"></i> Holidays and Events</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-glass-cheers mr-2"></i> Drinks</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-globe-americas mr-2"></i> Cuisines</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-fire mr-2"></i> BBQ & Grilling</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-fish mr-2"></i> Seafood Recipes</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-soup mr-2"></i> Soups</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-pasta mr-2"></i> Pasta and Noodles</a>
+                        <a href="#" class="block px-4 py-2"><i class="fas fa-briefcase mr-2"></i> Lunch Recipes</a>
                     </div>
                 </div>
                 <a href="#" class="text-lg">Starred Recipes</a>
                 <a href="#" class="text-lg">Meal Planner</a>
                 <a href="#" class="text-lg">Share Recipe</a>
             </div>
+            <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300">Login</button>
         </div>
     </nav>
 

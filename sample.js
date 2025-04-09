@@ -97,3 +97,10 @@ document.querySelector('.dropdown').addEventListener('mouseenter', function() {
 document.querySelector('.dropdown').addEventListener('mouseleave', function() {
   document.querySelector('.dropdown-content').classList.add('hidden');
 });
+
+var modal = document.getElementById('modal-wrapper');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
