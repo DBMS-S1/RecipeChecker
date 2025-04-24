@@ -34,7 +34,9 @@
 
 /* General Styles */
 body {
-  font-family: 'Roboto', sans-serif; /* Set font for the body */
+  height: 100%;
+  background-image: url('2.png');
+  font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3 {
@@ -56,12 +58,10 @@ input[type=text], input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-	font-size:16px;
+	  font-size:16px;
 }
 /* Set a style for all buttons */
-/* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
   margin: 8px 26px;
@@ -71,9 +71,6 @@ button {
   min-width: 100px; /* Set a minimum width */
   font-size: 20px;
   flex-grow: 0; /* Prevent the button from growing */
-  display: flex; /* Use flex to center text */
-  justify-content: center; /* Center text horizontally */
-  align-items: center; /* Center text vertically */
 }
 button:hover {
     opacity: 0.8;
@@ -85,9 +82,8 @@ button:hover {
     position: relative;
 }
 .avatar {
-    width: 200px;
-	height:200px;
-    border-radius: 50%;
+    margin: auto;
+
 }
 /* The Modal (background) */
 .modal {
@@ -107,7 +103,7 @@ button:hover {
     margin: 4% auto 15% auto;
     border: 1px solid #888;
     width: 40%; 
-	padding-bottom: 30px;
+	  padding-bottom: 30px;
 }
 /* The Close Button (x) */
 .close {

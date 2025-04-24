@@ -15,16 +15,17 @@
   <form class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-      <img src="" alt="Avatar" class="avatar">   <!--add your picture link-->
-      <h1 style="text-align:center">Login Page</h1>
+      <img src="5.png" alt="Avatar" class="avatar"> 
+      <h1 style="text-align:center">Welcome to Good Recipe, Great Recipe!</h1>
     </div>
 
     <div class="container">
       <input type="text" placeholder="Enter Username" name="uname">
       <input type="password" placeholder="Enter Password" name="psw">        
-      <button type="submit">Login</button>
-      <input type="checkbox" style="margin:26px 30px;"> Remember me      
-      <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+      <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">Login / Signup</button>
+      <br>
+      <input type="checkbox" style="margin:26px 30px; float: center">Remember me</input>  
+      <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password?</a>
     </div>
     
   </form>
@@ -54,7 +55,7 @@
                         <a href="#" class="block px-4 py-2"><i class="fas fa-calendar-alt mr-2"></i> Holidays and Events</a>
                         <a href="#" class="block px-4 py-2"><i class="fas fa-glass-cheers mr-2"></i> Drinks</a>
                         <a href="#" class="block px-4 py-2"><i class="fas fa-globe-americas mr-2"></i> Cuisines</a>
-                        <a href="#" class="block px-4 py-2"><i class="fas fa-fire mr-2"></i> BBQ & Grilling</a>
+                        <a href="#" class="block px -4 py-2"><i class="fas fa-fire mr-2"></i> BBQ & Grilling</a>
                         <a href="#" class="block px-4 py-2"><i class="fas fa-fish mr-2"></i> Seafood Recipes</a>
                         <a href="#" class="block px-4 py-2"><i class="fas fa-soup mr-2"></i> Soups</a>
                         <a href="#" class="block px-4 py-2"><i class="fas fa-pasta mr-2"></i> Pasta and Noodles</a>
@@ -103,15 +104,20 @@
                 </select>
                 <br>
                 <!-- Max Preparation Time -->
-                <label for="prep-time" class="text-lg">Max Preparation Time (minutes):</label>
-                <input type="number" id="prep-time" class="border rounded p-2 mb-4 w-full max-w-md" placeholder="e.g. 30">
-                <br>
+                <div class="text-center mb-4">
+                    <label for="prep-time" class="text-lg">Max Preparation Time (minutes):</label>
+                    <br>
+                    <input type="number" id="prep-time" class="border rounded p-2 mb-4 w-full max-w-md" placeholder="e.g. 30">
                 <!-- Max Cooking Time -->
-                <label for="cook-time" class="text-lg">Max Cooking Time (minutes):</label>
-                <input type="number" id="cook-time" class="border rounded p-2 mb-4 w-full max-w-md" placeholder="e.g. 30">
-                <br>
-                <button id="find-recipes" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">Find recipes!</button>
-                <div id="recipe-details" class="mt-6" style="display: none;"></div>
+                <div class="text-center mb-4">
+                    <label for="cook-time" class="text-lg">Max Cooking Time (minutes):</label>
+                    <br>
+                    <input type="number" id="cook-time" class="border rounded p-2 mt-2 mx-auto w-full max-w-md" placeholder="e.g. 30">
+                </div>
+                <!-- Find Recipes Button -->
+                <div class="text-center mb-4">
+                    <button id ="find-recipes" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">Find recipes!</button>
+                </div>
             </div>
         </div>
     </div>
@@ -119,7 +125,7 @@
     <!-- Footer -->
     <footer class="bg-gray-200 text-center py-4 mt-8">
         <div class="container mx-auto">
-            <p class="text-sm">© 2025 FerrBabies. All rights reserved.</p>
+            <p class="text-sm">© 2025 Ferr Babies. All rights reserved.</p>
         </div>
     </footer>
 
