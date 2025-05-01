@@ -11,27 +11,59 @@
 </head>
 <body class="bg-white text-center font-roboto">
 
-<div id="modal-wrapper" class="modal">
-  <form class="modal-content animate">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-      <img src="5.png" alt="Avatar" class="avatar"> 
-      <h1 style="text-align:center">Welcome to Good Recipe, Great Recipe!</h1>
+<!-- Home -->
+<section class="home">
+    <div class="form_container">
+      <i class="uil uil-times form_close"></i>
+      <!-- Login From -->
+      <div class="form login_form">
+        <form action="#">
+          <h2>Login</h2>
+          <div class="input_box">
+            <input type="email" placeholder="Enter your email" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Enter your password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <div class="option_field">
+            <span class="checkbox">
+              <input type="checkbox" id="check" />
+              <label for="check">Remember me</label>
+            </span>
+            <a href="#" class="forgot_pw">Forgot password?</a>
+          </div>
+          <button class="button">Login Now</button>
+          <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+        </form>
+      </div>
+      <!-- Signup From -->
+      <div class="form signup_form">
+        <form action="#">
+          <h2>Signup</h2>
+          <div class="input_box">
+            <input type="email" placeholder="Enter your email" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Create password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Confirm password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <button class="button">Signup Now</button>
+          <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+        </form>
+      </div>
     </div>
+  </section>
 
-    <div class="container">
-      <input type="text" placeholder="Enter Username" name="uname">
-      <input type="password" placeholder="Enter Password" name="psw">        
-      <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">Login / Signup</button>
-      <br>
-      <input type="checkbox" style="margin:26px 30px; float: center">Remember me</input>  
-      <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password?</a>
-    </div>
-    
-  </form>
-  
-</div>
-    
     <!-- Navigation Bar -->
     <nav class="bg-red-700 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
@@ -66,7 +98,7 @@
                 <a href="#" class="text-lg">Meal Planner</a>
                 <a href="#" class="text-lg">Share Recipe</a>
             </div>
-            <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300">Login</button>
+            <button class="button" id="form-open">Login</button>
         </div>
     </nav>
 
