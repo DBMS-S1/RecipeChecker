@@ -103,30 +103,7 @@ a {
 .button:active {
   transform: scale(0.98);
 }
-/* Home */
-.home {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  background-image: url("website-forms-bg.jpg");
-  background-size: cover;
-  background-position: center;
-}
-.home::before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 100;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.5s ease-out;
-}
-.home.show::before {
-  opacity: 1;
-  pointer-events: auto;
-}
+
 /* Form */
 .form_container {
   position: fixed;
@@ -136,7 +113,7 @@ a {
   left: 50%;
   transform: translate(-50%, -50%) scale(1.2);
   z-index: 101;
-  background: #fff;
+ background: #fff;
   padding: 25px;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.1);
@@ -250,3 +227,9 @@ a {
   text-align: center;
   margin-top: 15px;
 }
+
+.blur {
+  filter: blur(5px); /* Adjust the blur intensity as needed */
+  transition: filter 0.3s ease; /* Smooth transition for the blur effect */
+}
+

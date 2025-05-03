@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributors</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="bg-white text-center font-roboto">
+
+<!-- Home -->
+<section class="home">
+    <div class="form_container">
+      <i class="uil uil-times form_close"></i>
+      <!-- Login Form -->
+      <div class="form login_form">
+        <form action="#">
+          <h2>Login</h2>
+          <div class="input_box">
+            <input type="email" placeholder="Enter your email" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Enter your password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <div class="option_field">
+            <span class="checkbox">
+              <input type="checkbox" id="check" />
+              <label for="check">Remember me</label>
+            </span>
+            <a href="#" class="forgot_pw">Forgot password?</a>
+          </div>
+          <button class="button">Login Now</button>
+          <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+        </form>
+      </div>
+      <!-- Signup Form -->
+      <div class="form signup_form">
+        <form action="#">
+          <h2>Signup</h2>
+          <div class="input_box">
+            <input type="email" placeholder="Enter your email" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Create password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Confirm password" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <button class="button">Signup Now</button>
+          <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+        </form>
+      </div>
+    </div>
+</section>
+
+<!-- Navigation Bar -->
+<nav class="bg-red-700 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="flex space-x-4">
+            <a href="#" class="text-lg">Recipe Search</a>
+            <div class="dropdown relative">
+                <a href="#" class="text-lg">Categories</a>
+                <div class="dropdown-content absolute hidden bg-white text-black shadow-lg">
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-apple-alt mr-2"></i> Produce</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-bread-slice mr-2"></i> Bread Recipes</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-hamburger mr-2"></i> Appetizers and Snacks</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-utensils mr-2"></i> Dinner Recipes</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-clipboard-list mr-2"></i> Ingredients</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-flag mr-2"></i> Filipino Recipes</ a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-heartbeat mr-2"></i> Healthy Recipes</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-coffee mr-2"></i> Breakfast and Brunch</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-birthday-cake mr-2"></i> Desserts</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-drumstick-bite mr-2"></i> Main Dishes</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-carrot mr-2"></i> Side Dishes</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-star mr-2"></i> Trusted Brands</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-calendar-alt mr-2"></i> Holidays and Events</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-glass-cheers mr-2"></i> Drinks</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-globe-americas mr-2"></i> Cuisines</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-fire mr-2"></i> BBQ & Grilling</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-fish mr-2"></i> Seafood Recipes</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-soup mr-2"></i> Soups</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-pasta mr-2"></i> Pasta and Noodles</a>
+                    <a href="#" class="block px-4 py-2"><i class="fas fa-briefcase mr-2"></i> Lunch Recipes</a>
+                </div>
+            </div>
+            <a href="#" class="text-lg">Starred Recipes</a>
+            <a href="#" class="text-lg">Meal Planner</a>
+            <a href="#" class="text-lg">Share Recipe</a>
+            <a href="contributors.html" class="text-lg">Contributors</a>
+        </div>
+        
+        <button class="button" id="form-open">Login</button>
+    </div>
+</nav>
+
+<section class="bg-transparent py-12">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold text-center text-red-700 mb-4">Contributors</h1>
+        <p class="text-center text-red-500 mb-12">Meet the talented individuals who help bring this website to life</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg text-center transition-transform transform hover:scale-105 hover:bg-gray-100">
+                <div class="md:w-1/2 mt-8 md:mt-0 fade-in">
+                    <img 
+                        alt="1x1 Picture" 
+                        class="rounded-full mx-auto border-1 object-cover overflow-hidden" 
+                        style="box-shadow: 0 0 50.5px 10.5px #d0d5d8;" 
+                        height="300" 
+                        src="" 
+                        width="300"
+                    />
+                </div>
+                <h2 class="text-xl font-bold mb-2">Alessandra Sophia Keith C. Santos</h2>
+                <h3 class="text-m mb-2">2nd Year Computer Engineering Student</h3>
+                <p class="text-gray-400">I’m Sophie, a 20-year-old second-year college student taking up Computer Engineering. I’m passionate about learning both software and hardware development, and I enjoy discovering how technology works. I enjoy working on projects that challenge my skills and help me grow, and I’m always open to new experiences that will broaden my perspective in the field of technology.</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg text-center transition-transform transform hover:scale-105 hover:bg-gray-100">
+                <i class="fab fa-java text-orange-500 text-4xl mb-4 transition-colors duration-100 "></i>
+                <h2 class="text-xl font-bold mb-2">C++</h2>
+                <p class="text-gray-400">Programming in C++ for various applications.</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg text-center transition-transform transform hover:scale-105 hover:bg-gray-100">
+                <i class="fab fa-python text-orange-500 text-4xl mb-4 transition-colors duration-100 "></i>
+                <h2 class="text-xl font-bold mb-2">Python</h2>
+                <p class="text-gray-400">Using Python for data and automation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+<footer class="bg-red-700 text-white text-center py-4 mt-8">
+    <div class="container mx-auto">
+        <p class="text-sm">© 2025 Ferr Babies. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="sample.js"></script>
+</body>
+</html>
