@@ -1,32 +1,3 @@
-const recipes = [
-    {
-        servingSize: 4,
-        prepTime: 15,
-        cookTime: 30,
-        name: "Spaghetti Bolognese",
-        ingredients: ["spaghetti", "minced beef", "onion", "tomato sauce", "garlic"],
-        steps: [
-            "Boil the spaghetti.",
-            "Cook the minced beef with onions and garlic.",
-            "Add tomato sauce and simmer for 15 minutes.",
-            "Serve the sauce over the spaghetti."
-        ]
-    },
-    {
-        servingSize: 2,
-        prepTime: 10,
-        cookTime: 20,
-        name: "Chicken Salad",
-        ingredients: ["chicken breast", "lettuce", "tomatoes", "olive oil", "lemon"],
-        steps: [
-            "Cook the chicken breast.",
-            "Chop lettuce and tomatoes.",
-            "Combine chicken with vegetables, drizzle with olive oil and lemon."
-        ]
-    }
-];
-
-// Handle form submission for finding recipes
 document.getElementById('find-recipes').addEventListener('click', function () {
     const servingSize = parseInt(document.getElementById('serving-size').value);
     const prepTime = parseInt(document.getElementById('prep-time').value);
@@ -105,44 +76,3 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-
-const formOpenBtn = document.querySelector("#form-open"),
-      home = document.querySelector(".home"),
-      formContainer = document.querySelector(".form_container"),
-      formCloseBtn = document.querySelector(".form_close"),
-      signupBtn = document.querySelector("#signup"),
-      loginBtn = document.querySelector("#login"),
-      pwShowHide = document.querySelectorAll(".pw_hide");
-
-formOpenBtn.addEventListener("click", () => {
-    home.classList.add("show");
-    
-});
-
-formCloseBtn.addEventListener("click", () => {
-    home.classList.remove("show");
-
-});
-
-pwShowHide.forEach((icon) => {
-    icon.addEventListener("click", () => {
-        let getPwInput = icon.parentElement.querySelector("input");
-        if (getPwInput.type === "password") {
-            getPwInput.type = "text";
-            icon.classList.replace("uil-eye-slash", "uil-eye");
-        } else {
-            getPwInput.type = "password";
-            icon.classList.replace("uil-eye", "uil-eye-slash");
-        }
-    });
-});
-
-signupBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    formContainer.classList.add("active");
-});
-
-loginBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    formContainer.classList.remove("active");
-});
