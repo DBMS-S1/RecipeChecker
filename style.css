@@ -412,18 +412,22 @@ form {
   transition-duration: 400ms;
   transition-property: color;
   padding: 0 1rem;
+  margin-right: 1rem;
+}
+
+.nav-button:last-child {
+  margin-right: 0;
 }
 
 .nav-button:not(:last-child)::before {
   content: "";
   position: absolute;
   top: 20%;
-  right: 0;
+  right: -0.5rem;
   width: 1px;
   height: 60%;
   background-color: #e1e1e1;
 }
-
 
 .nav-button:focus,
 .nav-button:hover,

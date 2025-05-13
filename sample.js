@@ -33,66 +33,67 @@ window.addEventListener('load', function() {
     }
   });
   
-  // Functionality for recipe search button
-  document.getElementById('find-recipes').addEventListener('click', function () {
-      const servingSizeInput = document.getElementById('serving-size');
-      const prepTimeInput = document.getElementById('prep-time');
-      const cookTimeInput = document.getElementById('cook-time');
-      const includedIngredientsInput = document.getElementById('included-ingredients');
-      const excludedIngredientsInput = document.getElementById('excluded-ingredients');
-      const findRecipesBtn = this;
-  
-      // Parse and trim inputs
-      const servingSize = parseInt(servingSizeInput.value);
-      const prepTime = parseInt(prepTimeInput.value);
-      const cookTime = parseInt(cookTimeInput.value);
-      const includedIngredients = includedIngredientsInput.value
-          ? includedIngredientsInput.value.split(',').map(ingredient => ingredient.trim()).filter(Boolean)
-          : [];
-      const excludedIngredients = excludedIngredientsInput.value
-          ? excludedIngredientsInput.value.split(',').map(ingredient => ingredient.trim()).filter(Boolean)
-          : [];
-  
-      // Input validation with user-friendly messages
-      if (isNaN(servingSize) || servingSize <= 0) {
-          alert("Please select a valid serving size.");
-          servingSizeInput.focus();
-          return;
-      }
-      if (isNaN(prepTime) || prepTime < 0) {
-          alert("Please enter a valid preparation time.");
-          prepTimeInput.focus();
-          return;
-      }
-      if (isNaN(cookTime) || cookTime < 0) {
-          alert("Please enter a valid cooking time.");
-          cookTimeInput.focus();
-          return;
-      }
-  
-      // Disable button and show loading state
-      findRecipesBtn.disabled = true;
-      findRecipesBtn.textContent = 'Searching...';
-  
-      // Simulate async search with setTimeout
-      setTimeout(() => {
-          const recipe = findRecipe(servingSize, prepTime, cookTime, includedIngredients, excludedIngredients);
-  
-          if (recipe) {
-              displayRecipe(recipe);
-          } else {
-              alert("No matching recipe found.");
-              const recipeDetails = document.getElementById('recipe-details');
-              if (recipeDetails) {
-                  recipeDetails.style.display = 'none';
-              }
-          }
-  
-          // Re-enable button and reset text
-          findRecipesBtn.disabled = false;
-          findRecipesBtn.textContent = 'Find recipes!';
-      }, 500);
-  });
+const findRecipesBtn = document.getElementById('find-recipes');
+if (findRecipesBtn) {
+    findRecipesBtn.addEventListener('click', function () {
+        const servingSizeInput = document.getElementById('serving-size');
+        const prepTimeInput = document.getElementById('prep-time');
+        const cookTimeInput = document.getElementById('cook-time');
+        const includedIngredientsInput = document.getElementById('included-ingredients');
+        const excludedIngredientsInput = document.getElementById('excluded-ingredients');
+
+        // Parse and trim inputs
+        const servingSize = parseInt(servingSizeInput.value);
+        const prepTime = parseInt(prepTimeInput.value);
+        const cookTime = parseInt(cookTimeInput.value);
+        const includedIngredients = includedIngredientsInput.value
+            ? includedIngredientsInput.value.split(',').map(ingredient => ingredient.trim()).filter(Boolean)
+            : [];
+        const excludedIngredients = excludedIngredientsInput.value
+            ? excludedIngredientsInput.value.split(',').map(ingredient => ingredient.trim()).filter(Boolean)
+            : [];
+
+        // Input validation with user-friendly messages
+        if (isNaN(servingSize) || servingSize <= 0) {
+            alert("Please select a valid serving size.");
+            servingSizeInput.focus();
+            return;
+        }
+        if (isNaN(prepTime) || prepTime < 0) {
+            alert("Please enter a valid preparation time.");
+            prepTimeInput.focus();
+            return;
+        }
+        if (isNaN(cookTime) || cookTime < 0) {
+            alert("Please enter a valid cooking time.");
+            cookTimeInput.focus();
+            return;
+        }
+
+        // Disable button and show loading state
+        findRecipesBtn.disabled = true;
+        findRecipesBtn.textContent = 'Searching...';
+
+        // Simulate async search with setTimeout
+        setTimeout(() => {
+            const recipe = findRecipe(servingSize, prepTime, cookTime, includedIngredients, excludedIngredients);
+
+            if (recipe) {
+                displayRecipe(recipe);
+            } else {
+                alert("No matching recipe found.");
+                const recipeDetails = document.getElementById('recipe-details');
+                if (recipeDetails) {
+                    recipeDetails.style.display = 'none';
+                }
+            }
+
+            // Re-enable button and reset text
+            findRecipesBtn.disabled = false;
+            findRecipesBtn.textContent = 'Find recipes!';
+        }, 500);
+    });
+}
   
   // Function to search the recipe based on user input
   function findRecipe(servingSize, prepTime, cookTime, includedIngredients, excludedIngredients) {
