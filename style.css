@@ -276,7 +276,19 @@ form {
   user-select: none;
   transition: background-color 0.3s ease;
   box-shadow: 0 5px 14px rgba(211, 47, 47, 0.4);
+  position: relative;
 }
+
+.button:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  right: 0;
+  width: 1px;
+  height: 60%;
+  background-color: #e1e1e1;
+}
+
 .button:hover,
 .button:focus {
   background-color: #9c1b1b;
@@ -289,7 +301,36 @@ form {
   text-align: center;
   margin-top: 20px;
   user-select: text;
+  display: flex;
+  justify-content: center;
+  gap: 0;
 }
+
+.login_signup .button:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  right: 0;
+  width: 1px;
+  height: 60%;
+  background-color: #e1e1e1;
+}
+
+#login {
+  position: relative;
+}
+
+#login::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  right: 0;
+  width: 1px;
+  height: 60%;
+  background-color: #e1e1e1;
+  z-index: 10;
+}
+
 .login_signup a {
   color: #d32f2f;
   text-decoration: none;
@@ -356,47 +397,7 @@ form {
 }
 
 /* Scoped button styles for navigation buttons */
-.nav-button {
-  font-size: 18px;
-  color: #e1e1e1;
-  font-family: inherit;
-  font-weight: 800;
-  cursor: pointer;
-  position: relative;
-  border: none;
-  background: none;
-  text-transform: uppercase;
-  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition-duration: 400ms;
-  transition-property: color;
-}
-
-.nav-button:focus,
-.nav-button:hover {
-  color: #fff;
-}
-
-.nav-button:focus:after,
-.nav-button:hover:after {
-  width: 100%;
-  left: 0%;
-}
-
-.nav-button:after {
-  content: "";
-  pointer-events: none;
-  bottom: -2px;
-  left: 50%;
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background-color: #fff;
-  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition-duration: 400ms;
-  transition-property: width, left;
-}
-
-/* Scoped button styles for navigation buttons */
+.nav-button,
 .header_button {
   font-size: 18px;
   color: #e1e1e1;
@@ -410,6 +411,48 @@ form {
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 400ms;
   transition-property: color;
+  padding: 0 1rem;
+}
+
+.nav-button:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  right: 0;
+  width: 1px;
+  height: 60%;
+  background-color: #e1e1e1;
+}
+
+
+.nav-button:focus,
+.nav-button:hover,
+.header_button:focus,
+.header_button:hover {
+  color: #fff;
+}
+
+.nav-button:focus:after,
+.nav-button:hover:after,
+.header_button:focus:after,
+.header_button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.nav-button:after,
+.header_button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #fff;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
 }
 
 .header_button:focus,
