@@ -1,109 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contributors</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Good Recipe, Great Recipe</title>
+    <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"/>
 </head>
-<body class="bg-white text-center font-roboto">
-
-<!-- Home -->
-<section class="home">
+<body class="text-center font-roboto">
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+  <section class="home" aria-label="User login and signup forms" style="display: none" role="dialog" aria-modal="true" aria-labelledby="formTitle" aria-describedby="formDesc">
     <div class="form_container">
-      <i class="uil uil-times form_close"></i>
+      <i class="uil uil-times form_close" role="button" aria-label="Close form" tabindex="0"></i>
       <!-- Login Form -->
-      <div class="form login_form">
-        <form action="#">
-          <h2>Login</h2>
+      <div class="form login_form" aria-hidden="false">
+        <form id="loginForm" action="#" method="POST" novalidate>
+          <h2 id="formTitle">Login</h2>
           <div class="input_box">
-            <input type="email" placeholder="Enter your email" required />
+            <input
+              id="login_email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+              aria-required="true"
+              aria-label="Email address"
+              autocomplete="email"
+            />
             <i class="uil uil-envelope-alt email"></i>
           </div>
           <div class="input_box">
-            <input type="password" placeholder="Enter your password" required />
+            <input
+              id="login_password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              required
+              aria-required="true"
+              aria-label="Password"
+              autocomplete="current-password"
+            />
             <i class="uil uil-lock password"></i>
-            <i class="uil uil-eye-slash pw_hide"></i>
+            <i
+              class="uil uil-eye-slash pw_hide"
+              tabindex="0"
+              role="button"
+              aria-label="Show or hide password"
+            ></i>
           </div>
           <div class="option_field">
             <span class="checkbox">
-              <input type="checkbox" id="check" />
-              <label for="check">Remember me</label>
+              <input type="checkbox" id="remember_me" name="remember" />
+              <label for="remember_me">Remember me</label>
             </span>
             <a href="#" class="forgot_pw">Forgot password?</a>
           </div>
-          <button class="button">Login Now</button>
-          <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+          <button type="submit" class="button" aria-live="polite">
+            Login Now
+          </button>
+          <div class="login_signup">
+            Don't have an account? <a href="#" id="signup">Sign Up</a>
+          </div>
         </form>
       </div>
       <!-- Signup Form -->
-      <div class="form signup_form">
-        <form action="#">
-          <h2>Signup</h2>
+      <div class="form signup_form" aria-hidden="true">
+        <form id="signupForm" action="#" method="POST" novalidate>
+          <h2 id="formDesc">Sign Up</h2>
           <div class="input_box">
-            <input type="email" placeholder="Enter your email" required />
+            <input
+              id="signup_email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+              aria-required="true"
+              aria-label="Email address"
+              autocomplete="email"
+            />
             <i class="uil uil-envelope-alt email"></i>
           </div>
           <div class="input_box">
-            <input type="password" placeholder="Create password" required />
+            <input
+              id="signup_password"
+              name="password"
+              type="password"
+              placeholder="Create password"
+              required
+              aria-required="true"
+              aria-label="Create password"
+              autocomplete="new-password"
+            />
             <i class="uil uil-lock password"></i>
-            <i class="uil uil-eye-slash pw_hide"></i>
+            <i
+              class="uil uil-eye-slash pw_hide"
+              tabindex="0"
+              role="button"
+              aria-label="Show or hide password"
+            ></i>
           </div>
           <div class="input_box">
-            <input type="password" placeholder="Confirm password" required />
+            <input
+              id="confirm_password"
+              name="confirm_password"
+              type="password"
+              placeholder="Confirm password"
+              required
+              aria-required="true"
+              aria-label="Confirm password"
+              autocomplete="new-password"
+            />
             <i class="uil uil-lock password"></i>
-            <i class="uil uil-eye-slash pw_hide"></i>
+            <i
+              class="uil uil-eye-slash pw_hide"
+              tabindex="0"
+              role="button"
+              aria-label="Show or hide password"
+            ></i>
           </div>
-          <button class="button">Signup Now</button>
-          <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+          <button type="submit" class="button" aria-live="polite"> Sign Up Now </button>
+          <div class="login_signup"> Already have an account? <a href="#" id="login">Login</a>
+          </div>
         </form>
       </div>
     </div>
-</section>
+  </section>
 
-<!-- Navigation Bar -->
-<nav class="bg-red-700 text-white p-4">
+  <!-- Navigation Bar -->
+  <nav class="bg-red-700 text-white p-4" role="navigation" aria-label="Main navigation">
     <div class="container mx-auto flex justify-between items-center">
-        <div class="flex space-x-4">
-            <a href="index.html"text-lg">Recipe Search</a>
-            <div class="dropdown relative">
-                <a href="#" class="text-lg">Categories</a>
-                <div class="dropdown-content absolute hidden bg-white text-black shadow-lg">
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-apple-alt mr-2"></i> Produce</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-bread-slice mr-2"></i> Bread Recipes</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-hamburger mr-2"></i> Appetizers and Snacks</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-utensils mr-2"></i> Dinner Recipes</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-clipboard-list mr-2"></i> Ingredients</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-flag mr-2"></i> Filipino Recipes</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-heartbeat mr-2"></i> Healthy Recipes</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-coffee mr-2"></i> Breakfast and Brunch</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-birthday-cake mr-2"></i> Desserts</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-drumstick-bite mr-2"></i> Main Dishes</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-carrot mr-2"></i> Side Dishes</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-star mr-2"></i> Trusted Brands</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-calendar-alt mr-2"></i> Holidays and Events</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-glass-cheers mr-2"></i> Drinks</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-globe-americas mr-2"></i> Cuisines</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-fire mr-2"></i> BBQ & Grilling</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-fish mr-2"></i> Seafood Recipes</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-soup mr-2"></i> Soups</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-pasta mr-2"></i> Pasta and Noodles</a>
-                    <a href="#" class="block px-4 py-2"><i class="fas fa-briefcase mr-2"></i> Lunch Recipes</a>
-                </div>
-            </div>
-            <a href="#" class="text-lg">Starred Recipes</a>
-            <a href="#" class="text-lg">Meal Planner</a>
-            <a href="#" class="text-lg">Share Recipe</a>
-            <a href="contributors.html" class="text-lg">Contributors</a>
-        </div>
-        
-        <button class="button1" id="form-open">Login</button>
+      <div class="flex space-x-4">
+        <a href="index.html" class="text-lg" tabindex="0">Recipe Search</a>
+        <a href="categories.html" class="text-lg" tabindex="0">Categories</a>
+        <a href="#" class="text-lg" tabindex="0">Starred Recipes</a>
+        <a href="#" class="text-lg" tabindex="0">Meal Planner</a>
+        <a href="#" class="text-lg" tabindex="0">Share Recipe</a>
+        <a href="contributors.html" class="text-lg" tabindex="0">Contributors</a>
+      </div>
+      <div class="flex space-x-2">
+        <button id="openLogin" class="header_button" aria-label="Open Login form" tabindex="0">Login</button>
+        <button id="openSignup" class="header_button" aria-label="Open Signup form" tabindex="0">Signup</button>
+      </div>
     </div>
-</nav>
-
+  </nav>
+  
 <section class="bg-transparent py-12">
     <div class="container mx-auto">
         <h1 class="text-4xl font-bold text-center text-red-700 mb-4">Contributors</h1>
