@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Good Recipe, Great Recipe - Categories</title>
+    <title>Good Recipe, Great Recipe</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
@@ -12,6 +12,119 @@
 </head>
 <body class="text-center font-roboto">
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
+  <section class="home" aria-label="User login and signup forms" style="display: none" role="dialog" aria-modal="true" aria-labelledby="formTitle" aria-describedby="formDesc">
+    <div class="form_container">
+      <i class="uil uil-times form_close" role="button" aria-label="Close form" tabindex="0"></i>
+      <!-- Login Form -->
+      <div class="form login_form" aria-hidden="false">
+        <form id="loginForm" action="#" method="POST" novalidate>
+          <h2 id="formTitle">Login</h2>
+          <div class="input_box">
+            <input
+              id="login_email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+              aria-required="true"
+              aria-label="Email address"
+              autocomplete="email"
+            />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+          <div class="input_box">
+            <input
+              id="login_password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              required
+              aria-required="true"
+              aria-label="Password"
+              autocomplete="current-password"
+            />
+            <i class="uil uil-lock password"></i>
+            <i
+              class="uil uil-eye-slash pw_hide"
+              tabindex="0"
+              role="button"
+              aria-label="Show or hide password"
+            ></i>
+          </div>
+          <div class="option_field">
+            <span class="checkbox">
+              <input type="checkbox" id="remember_me" name="remember" />
+              <label for="remember_me">Remember me?</label>
+            </span>
+            <a href="#" class="forgot_pw">Forgot password?</a>
+          </div>
+          <button type="submit" class="button" aria-live="polite"> Login Now </button>
+          <div class="login_signup"> Don't have an account? <a href="#" id="signup"> Sign Up </a>
+          </div>
+        </form>
+      </div>
+      <!-- Signup Form -->
+      <div class="form signup_form" aria-hidden="true">
+        <form id="signupForm" action="#" method="POST" novalidate>
+          <h2 id="formDesc">Sign Up</h2>
+          <div class="input_box">
+            <input
+              id="signup_email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+              aria-required="true"
+              aria-label="Email address"
+              autocomplete="email"
+            />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+          <div class="input_box">
+            <input
+              id="signup_password"
+              name="password"
+              type="password"
+              placeholder="Create password"
+              required
+              aria-required="true"
+              aria-label="Create password"
+              autocomplete="new-password"
+            />
+            <i class="uil uil-lock password"></i>
+            <i
+              class="uil uil-eye-slash pw_hide"
+              tabindex="0"
+              role="button"
+              aria-label="Show or hide password"
+            ></i>
+          </div>
+          <div class="input_box">
+            <input
+              id="confirm_password"
+              name="confirm_password"
+              type="password"
+              placeholder="Confirm password"
+              required
+              aria-required="true"
+              aria-label="Confirm password"
+              autocomplete="new-password"
+            />
+            <i class="uil uil-lock password"></i>
+            <i
+              class="uil uil-eye-slash pw_hide"
+              tabindex="0"
+              role="button"
+              aria-label="Show or hide password"
+            ></i>
+          </div>
+          <button type="submit" class="button" aria-live="polite"> Sign Up Now </button>
+          <div class="login_signup"> Already have an account? <a href="#" id="login"> Login </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 
   <!-- Navigation Bar -->
   <nav class="bg-red-700 text-white p-4" role="navigation" aria-label="Main navigation">
@@ -36,6 +149,7 @@
       </div>
     </div>
   </nav>
+
 
   <main id="main-content" class="container mx-auto px-4 py-8" tabindex="-1">
     <h1 class="text-4xl font-bold mb-4">Categories</h1>
