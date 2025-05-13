@@ -3,32 +3,33 @@ window.addEventListener('load', function() {
     const mainContent = document.getElementById('main-content');
     const navBar = document.querySelector('nav');
     const homeSection = document.querySelector('.home');
-    const recipeSearchSection = document.querySelector('section[aria-label="Recipe search"]');
 
     if (loadingScreen && mainContent && navBar && homeSection) {
-      // Check if loading screen has been shown before
-      if (!localStorage.getItem('loadingScreenShown')) {
-        navBar.style.display = 'none';
-        setTimeout(() => {
+      // Show loading screen on index.html once per browser session (sessionStorage)
+      const currentPath = window.location.pathname.toLowerCase();
+      if (currentPath.endsWith('index.html')) {
+        if (!sessionStorage.getItem('loadingScreenShown')) {
+          navBar.style.display = 'none';
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            mainContent.style.display = 'block';
+            navBar.style.display = 'flex';
+            homeSection.style.display = 'none';
+            sessionStorage.setItem('loadingScreenShown', 'true');
+          }, 3000);
+        } else {
           loadingScreen.style.display = 'none';
           mainContent.style.display = 'block';
           navBar.style.display = 'flex';
           homeSection.style.display = 'none';
-          // Mark loading screen as shown
-          localStorage.setItem('loadingScreenShown', 'true');
-        }, 3000);
+        }
       } else {
-        // Loading screen already shown, skip it
+        // On other pages, do not show loading screen
         loadingScreen.style.display = 'none';
         mainContent.style.display = 'block';
         navBar.style.display = 'flex';
         homeSection.style.display = 'none';
       }
-    }
-
-    // Ensure Recipe Search section remains visible if on Recipe Search page
-    if (recipeSearchSection) {
-      recipeSearchSection.style.display = 'block';
     }
   });
   
@@ -144,6 +145,4 @@ window.addEventListener('load', function() {
       window.onclick = function(event) {
           if (event.target == modal) {
               modal.style.display = "none";
-          }
-      };
-  }
+          }}};
