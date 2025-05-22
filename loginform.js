@@ -164,17 +164,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (valid) {
-      // Simulate submission delay and feedback
+      // Send signup data to backend API
       const submitBtn = passwordInput.form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
       submitBtn.textContent = 'Signing up...';
 
-      setTimeout(() => {
-        alert('Signup successful!');
+      fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: emailInput.value.trim(),
+          password: passwordInput.value.trim()
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        if (data.message === 'User created successfully.') {
+          home.style.display = 'none';
+        }
         submitBtn.disabled = false;
         submitBtn.textContent = 'Sign Up Now';
-        home.style.display = 'none';
-      }, 1500);
+      })
+      .catch(error => {
+        alert('Error: ' + error.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign Up Now';
+      });
     }
   });
 
@@ -203,17 +221,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (valid) {
-      // Simulate submission delay and feedback
+      // Send login data to backend API
       const submitBtn = passwordInput.form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
       submitBtn.textContent = 'Logging in...';
 
-      setTimeout(() => {
-        alert('Login successful!');
+      fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: emailInput.value.trim(),
+          password: passwordInput.value.trim()
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        if (data.message === 'Login successful.') {
+          home.style.display = 'none';
+        }
         submitBtn.disabled = false;
         submitBtn.textContent = 'Login Now';
-        home.style.display = 'none';
-      }, 1500);
+      })
+      .catch(error => {
+        alert('Error: ' + error.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Login Now';
+      });
     }
   });
 });
