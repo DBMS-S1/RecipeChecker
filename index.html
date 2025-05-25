@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Good Recipe, Great Recipe</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="loginform.css"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -154,16 +155,16 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
           <h2 id="formTitle">Login</h2>
           <div class="input_box">
             <input
-              id="login_email"
-              name="email"
-              type="email"
-              placeholder="Enter your email"
+              id="login_identifier"
+              name="identifier"
+              type="text"
+              placeholder="Enter your username or email"
               required
               aria-required="true"
-              aria-label="Email address"
-              autocomplete="email"
+              aria-label="Username or Email address"
+              autocomplete="username"
             />
-            <i class="uil uil-envelope-alt email"></i>
+            <i class="uil uil-user-circle"></i>
           </div>
           <div class="input_box">
             <input
@@ -192,7 +193,7 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
             <a href="#" class="forgot_pw">Forgot password?</a>
           </div>
           <button type="submit" class="button" aria-live="polite"> Login Now </button>
-          <div class="login_signup"> Don't have an account? <a href="#" id="signup"> Sign Up </a>
+          <div class="login_signup"> Don't have an account? <a href="#" id="signup">&nbsp;Sign Up </a>
           </div>
         </form>
       </div>
@@ -200,6 +201,19 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
       <div class="form signup_form" aria-hidden="true">
         <form id="signupForm" action="#" method="POST" novalidate>
           <h2 id="formDesc"> Sign Up </h2>
+          <div class="input_box">
+            <input
+              id="signup_username"
+              name="username"
+              type="text"
+              placeholder="Enter your username"
+              required
+              aria-required="true"
+              aria-label="Username"
+              autocomplete="username"
+            />
+            <i class="uil uil-user-circle"></i>
+          </div>
           <div class="input_box">
             <input
               id="signup_email"
@@ -252,7 +266,7 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
             ></i>
           </div>
           <button type="submit" class="button" aria-live="polite"> Sign Up Now </button>
-          <div class="login_signup"> Already have an account?<a href="#" id="login"> Login</a>
+          <div class="login_signup"> Already have an account?<a href="#" id="login">&nbsp;Login</a>
           </div>
         </form>
       </div>
@@ -271,14 +285,6 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
         <i class="fas fa-th-large inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
         Categories
       </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='starred.html'">
-        <i class="fas fa-star inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Starred Recipes
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='planner.html'">
-        <i class="fas fa-calendar-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Meal Planner
-      </button>
       <button class="text-lg nav-button" tabindex="0" onclick="location.href='share.html'">
         <i class="fas fa-share-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
         Share Recipe
@@ -296,6 +302,14 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
       <button id="openSignup" class="header_button" aria-label="Open Signup form" tabindex="0">
       <i class="fas fa-user-plus inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
         Sign Up
+      </button>
+      <button id="profileBtn" class="header_button" aria-label="Profile" tabindex="0" style="display:none;" onclick="location.href='profile.html'">
+        <i class="fas fa-user-circle inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+        Profile
+      </button>
+      <button id="logoutBtn" class="header_button" aria-label="Logout" tabindex="0" style="display:none;">
+      <i class="fas fa-sign-out-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+      Logout
       </button>
       </div>
     </div>
@@ -337,7 +351,6 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
 
         <!-- Serving Size -->
         <label for="serving-size" class="text-lg">Serving Size:</label>
-        <br/>
         <select id="serving-size" class="border rounded p-2 mb-4 w-full max-w-md" aria-label="Serving size">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -348,11 +361,9 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
           <option value="7">7</option>
           <option value="8">8</option>
         </select>
-        <br/>
         <!-- Max Preparation Time -->
         <div class="text-center mb-4">
           <label for="prep-time" class="text-lg">Max Preparation Time (minutes):</label>
-          <br />
           <input
             type="number"
             id="prep-time"
@@ -364,7 +375,6 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
         <!-- Max Cooking Time -->
         <div class="text-center mb-4">
           <label for="cook-time" class="text-lg">Max Cooking Time (minutes):</label>
-          <br />
           <input
             type="number"
             id="cook-time"
@@ -394,12 +404,11 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
   <!-- Footer -->
   <footer class="bg-red-700 text-white text-center py-4 mt-8">
     <div class="container mx-auto">
-      <p class="text-sm">© 2025 Ferr Babies. All rights reserved.</p>
+      <p class="text-sm">© 2025 FerrBabies. All rights reserved.</p>
     </div>
   </footer>
   <script src="sample.js"></script>
   <script src="loginform.js"></script>
   <script src="recipesDisplay.js"></script>
-
 </body>
 </html>

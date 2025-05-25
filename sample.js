@@ -5,17 +5,17 @@ window.addEventListener('load', function() {
     const homeSection = document.querySelector('.home');
 
     if (loadingScreen && mainContent && navBar && homeSection) {
-      // Show loading screen on index.html once per browser session (sessionStorage)
+      // Show loading screen on index.html only once ever (localStorage)
       const currentPath = window.location.pathname.toLowerCase();
       if (currentPath.endsWith('index.html')) {
-        if (!sessionStorage.getItem('loadingScreenShown')) {
+        if (!localStorage.getItem('loadingScreenShown')) {
           navBar.style.display = 'none';
           setTimeout(() => {
             loadingScreen.style.display = 'none';
             mainContent.style.display = 'block';
             navBar.style.display = 'flex';
             homeSection.style.display = 'none';
-            sessionStorage.setItem('loadingScreenShown', 'true');
+            localStorage.setItem('loadingScreenShown', 'true');
           }, 3000);
         } else {
           loadingScreen.style.display = 'none';
@@ -32,8 +32,6 @@ window.addEventListener('load', function() {
       }
     }
   });
-
-// Recipe search and display logic removed from sample.js to avoid conflicts with recipesDisplay.js
 
 // Dropdown functionality
 const dropdown = document.querySelector('.dropdown');

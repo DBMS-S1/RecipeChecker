@@ -105,314 +105,24 @@
   }
 }
 
-/* Login/Signup form styles */
-.home {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  z-index: 9999;
-}
-
-.form_container {
-  position: relative;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 32px 28px 28px;
-  border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(211, 47, 47, 0.3);
-  width: 350px;
-  max-width: 100%;
-  transition: all 0.4s ease;
-  overflow: hidden;
-  box-sizing: border-box;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Close Button */
-.form_close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  font-size: 24px;
-  color: #707070;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-}
-.form_close:hover,
-.form_close:focus {
-  opacity: 1;
-  color: #d32f2f;
-  outline: none;
-}
-
-/* Form Headings */
-.form_container h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #0b0217;
-  margin-bottom: 18px;
-  user-select: text;
-  text-align: center;
-}
-
-form {
-  width: 100%;
-}
-
-/* Input Box Container */
-.input_box {
-  position: relative;
-  margin-bottom: 24px;
-}
-
-/* Inputs */
-.input_box input {
-  width: 100%;
-  height: 44px;
-  padding: 0 38px 0 38px;
-  border: 1.8px solid #cccccc;
-  border-radius: 8px;
-  font-size: 15px;
-  color: #0b0217;
-  transition: border-color 0.3s ease;
-  outline-offset: 2px;
-  outline-color: transparent;
-}
-.input_box input::placeholder {
-  color: #707070;
-}
-.input_box input:focus {
-  border-color: #d32f2f;
-  outline-color: #d32f2f;
-}
-
-/* Icons inside input */
-.input_box i {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: #707070;
-  user-select: none;
-}
-.input_box i.email, .input_box i.password {
-  left: 12px;
-}
-
-/* Password Show/Hide Icon */
-.input_box i.pw_hide {
-  right: 12px;
-  font-size: 18px;
-  cursor: pointer;
-  user-select: none;
-  color: #707070;
-  transition: color 0.3s ease;
-}
-.input_box i.pw_hide:hover,
-.input_box i.pw_hide:focus {
-  color: #d32f2f;
-  outline: none;
-}
-
-/* Option Field for checkbox and forgot password */
-.option_field {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  margin-bottom: 30px;
-}
-
-/* Checkbox group */
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  user-select: none;
-}
-.checkbox input[type="checkbox"] {
-  width: 17px;
-  height: 17px;
-  accent-color: #d32f2f;
-  cursor: pointer;
-}
-.checkbox label {
-  color: #0b0217;
-}
-
-/* Forgot password link */
-.option_field a.forgot_pw {
-  color: #d32f2f;
-  text-decoration: none;
-  cursor: pointer;
-  transition: text-decoration 0.3s ease;
-}
-.option_field a.forgot_pw:hover,
-.form_container a:hover,
-.form_container a:focus {
-  text-decoration: underline;
-  outline: none;
-}
-
-/* Buttons */
-.button {
-  display: inline-block;
-  width: 100%;
-  padding: 12px 0;
-  border: none;
-  border-radius: 10px;
-  background-color: #d32f2f;
-  color: #fff;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 5px 14px rgba(211, 47, 47, 0.4);
-  position: relative;
-}
-
-.button:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 20%;
-  right: 0;
-  width: 1px;
-  height: 60%;
-  background-color: #e1e1e1;
-}
-
-.button:hover,
-.button:focus {
-  background-color: #9c1b1b;
-  outline: none;
-}
-
-/* Signup / login switch text */
-.login_signup {
-  font-size: 14px;
-  text-align: center;
-  margin-top: 20px;
-  user-select: text;
-  display: flex;
-  justify-content: center;
-  gap: 0;
-}
-
-.login_signup .button:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 20%;
-  right: 0;
-  width: 1px;
-  height: 60%;
-  background-color: #e1e1e1;
-}
-
-#login {
-  position: relative;
-}
-
-#login::after {
-  content: "";
-  position: absolute;
-  top: 20%;
-  right: 0;
-  width: 1px;
-  height: 60%;
-  background-color: #e1e1e1;
-  z-index: 10;
-}
-
-.login_signup a {
-  color: #d32f2f;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: text;
-  user-select: text;
-}
-.login_signup a:hover,
-.login_signup a:focus {
-  text-decoration: underline;
-  outline: none;
-}
-
-/* Forms toggling */
-.signup_form {
-  display: none;
-}
-.form_container.active .signup_form {
-  display: block;
-  animation: fadeIn 0.3s ease forwards;
-}
-.form_container.active .login_form {
-  display: none;
-}
-.form_container:not(.active) .login_form {
-  display: block;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-/* FadeIn animation for smooth form change */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive adjustments for smaller devices */
-@media (max-width: 380px) {
-  .form_container {
-    width: 100%;
-    padding: 28px 20px 24px;
-    border-radius: 12px;
-  }
-  .form_container h2 {
-    font-size: 22px;
-  }
-  .button {
-    font-size: 16px;
-    padding: 11px 0;
-  }
-  .input_box input {
-    height: 42px;
-    padding-left: 34px;
-    font-size: 14px;
-  }
-  .input_box i {
-    font-size: 18px;
-  }
-}
-
-/* Scoped button styles for navigation buttons */
 .nav-button,
 .header_button {
-  font-size: 18px;
+  font-size: 13px;
   color: #e1e1e1;
   font-family: inherit;
-  font-weight: 800;
+  font-weight: 500;
   cursor: pointer;
   position: relative;
   border: none;
   background: none;
-  text-transform: uppercase;
+  text-transform: none;
+  line-height: 1.2;
+  white-space: nowrap;
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 400ms;
   transition-property: color;
-  padding: 0 1rem;
-  margin-right: 1rem;
+  padding: 0 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .nav-button:last-child {
@@ -494,6 +204,112 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   color: #333;
+}
+
+/* Recipe Search Section Improvements */
+section[aria-label="Recipe search"] {
+  background-color: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+  transition: box-shadow 0.3s ease;
+}
+
+section[aria-label="Recipe search"]:hover {
+  box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+}
+
+section[aria-label="Recipe search"] .text-center p {
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: #2c3e50;
+  letter-spacing: 0.02em;
+}
+
+section[aria-label="Recipe search"] input[type="text"],
+section[aria-label="Recipe search"] input[type="number"],
+section[aria-label="Recipe search"] select {
+  border: 1.5px solid #cbd5e0;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  font-size: 1.125rem;
+  color: #2c3e50;
+  background-color: #f9fafb;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+}
+
+section[aria-label="Recipe search"] input[type="text"]:focus,
+section[aria-label="Recipe search"] input[type="number"]:focus,
+section[aria-label="Recipe search"] select:focus {
+  outline: none;
+  border-color: #e53e3e;
+  box-shadow: 0 0 8px rgba(229, 62, 62, 0.6);
+}
+
+section[aria-label="Recipe search"] label {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #4a5568;
+  display: block;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
+section[aria-label="Recipe search"] button#find-recipes {
+  background-color: #e53e3e;
+  color: white;
+  padding: 0.85rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.5);
+}
+
+section[aria-label="Recipe search"] button#find-recipes:hover,
+section[aria-label="Recipe search"] button#find-recipes:focus {
+  background-color: #9b2c2c;
+  outline: none;
+  box-shadow: 0 6px 18px rgba(155, 44, 44, 0.7);
+}
+
+/* Custom select arrow */
+section[aria-label="Recipe search"] select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%23333%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 10px 7px;
+  padding-right: 2.5rem;
+}
+
+/* Responsive improvements */
+@media (max-width: 640px) {
+  section[aria-label="Recipe search"] {
+    padding: 1.5rem 1rem;
+    width: 90%;
+  }
+  section[aria-label="Recipe search"] .text-center p {
+    font-size: 1.25rem;
+  }
+  section[aria-label="Recipe search"] button#find-recipes {
+    font-size: 1.125rem;
+    padding: 0.75rem 1.25rem;
+  }
 }
 
  .contributor-header-image {

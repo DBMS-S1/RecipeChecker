@@ -1,3 +1,7 @@
+// Additional imports for file upload
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -24,8 +28,10 @@ mongoose.connect(mongoURI, {
 
 // User schema and model
 const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  avatar: { type: String, default: '' }, // New avatar field to store image URL or base64
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -35,18 +41,50 @@ const User = mongoose.model('User', userSchema);
 const recipeContainerSchema = new mongoose.Schema({}, { collection: 'recipes', strict: false });
 const RecipeContainer = mongoose.model('RecipeContainer', recipeContainerSchema);
 
+// Multer setup for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadDir = path.join(__dirname, 'uploads');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir);
+    }
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    // Use username + original extension as filename
+    const ext = path.extname(file.originalname);
+    cb(null, req.body.username + ext);
+  }
+});
+
+// File filter to restrict file types
+function fileFilter(req, file, cb) {
+  const allowedTypes = ['image/png', 'image/jpeg', 'image/webp'];
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Only PNG, JPEG, and WEBP files are allowed.'));
+  }
+}
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  fileFilter: fileFilter
+});
+
 // Signup endpoint
 app.post('/api/signup', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required.' });
+  const { username, email, password } = req.body;
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: 'Username, email and password are required.' });
   }
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
       return res.status(409).json({ message: 'User already exists.' });
     }
-    const newUser = new User({ email, password });
+    const newUser = new User({ username, email, password });
     await newUser.save();
     return res.status(201).json({ message: 'User created successfully.' });
   } catch (error) {
@@ -55,20 +93,75 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-// Login endpoint
-app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required.' });
+// Update profile endpoint
+app.put('/api/update-profile', async (req, res) => {
+  const { username, email, password, newUsername } = req.body;
+  if (!username) {
+    return res.status(400).json({ message: 'Current username is required.' });
   }
   try {
-    const user = await User.findOne({ email, password });
+    const updateData = {};
+    if (email) updateData.email = email;
+    if (password) updateData.password = password;
+    if (newUsername) updateData.username = newUsername;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { username: username },
+      updateData,
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    return res.status(200).json({ message: 'Profile updated successfully.', user: updatedUser });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    return res.status(500).json({ message: 'Server error.' });
+  }
+});
+
+// Login endpoint
+app.post('/api/login', async (req, res) => {
+  const { identifier, password } = req.body; // identifier can be username or email
+  if (!identifier || !password) {
+    return res.status(400).json({ message: 'Username/email and password are required.' });
+  }
+  try {
+    const user = await User.findOne({
+      $or: [{ email: identifier }, { username: identifier }],
+      password: password
+    });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password.' });
+      return res.status(401).json({ message: 'Invalid username/email or password.' });
     }
     return res.status(200).json({ message: 'Login successful.' });
   } catch (error) {
     console.error('Login error:', error);
+    return res.status(500).json({ message: 'Server error.' });
+  }
+});
+
+// Upload avatar endpoint
+app.post('/api/upload-avatar', upload.single('avatar'), async (req, res) => {
+  const username = req.body.username;
+  if (!username || !req.file) {
+    return res.status(400).json({ message: 'Username and avatar file are required.' });
+  }
+  try {
+    const avatarUrl = `/uploads/${req.file.filename}`;
+    const user = await User.findOneAndUpdate(
+      { username: username },
+      { avatar: avatarUrl },
+      { new: true }
+    );
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+    return res.status(200).json({ message: 'Avatar uploaded successfully.', avatar: avatarUrl });
+  } catch (error) {
+    console.error('Avatar upload error:', error);
     return res.status(500).json({ message: 'Server error.' });
   }
 });
@@ -130,6 +223,27 @@ app.get('/api/recipes', async (req, res) => {
   } catch (error) {
     console.error('Error fetching recipes:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Get user profile endpoint
+app.get('/api/user-profile', async (req, res) => {
+  const username = req.query.username;
+  if (!username) {
+    return res.status(400).json({ message: 'Username query parameter is required.' });
+  }
+  try {
+    const user = await User.findOne({ username: username }).select('username email avatar');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.error('Get user profile error:', error);
+    return res.status(500).json({ message: 'Server error.' });
   }
 });
 
