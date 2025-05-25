@@ -266,7 +266,13 @@ app.delete('/api/delete-avatar', async (req, res) => {
   }
 });
 
+app.get('/test', (req, res) => {
+  res.json({ status: 'working', timestamp: new Date() });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
