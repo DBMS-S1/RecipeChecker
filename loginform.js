@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('username');
       localStorage.removeItem('avatar');
+      localStorage.removeItem('email');
       toggleAuthButtons();
       window.location.href = 'index.html';
     });

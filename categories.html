@@ -185,6 +185,28 @@
     <h1 class="text-4xl font-bold mb-4">Categories</h1>
     <p class="text-lg mb-8">Explore recipe categories to find your favorite dishes.</p>
     <!-- Categories content here -->
+    <div class="categories-grid grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="category-card bg-white rounded-lg shadow p-6 cursor-pointer hover:bg-red-100 transition">
+        <h2 class="text-xl font-semibold mb-2">Breakfast</h2>
+        <p>Start your day with delicious breakfast recipes.</p>
+        <ul id="breakfast-list" class="recipe-list mt-2"></ul>
+      </div>
+      <div class="category-card bg-white rounded-lg shadow p-6 cursor-pointer hover:bg-red-100 transition">
+        <h2 class="text-xl font-semibold mb-2">Lunch</h2>
+        <p>Find tasty and quick lunch ideas.</p>
+        <ul id="lunch-list" class="recipe-list mt-2"></ul>
+      </div>
+      <div class="category-card bg-white rounded-lg shadow p-6 cursor-pointer hover:bg-red-100 transition">
+        <h2 class="text-xl font-semibold mb-2">Dinner</h2>
+        <p>Explore hearty dinner recipes for every occasion.</p>
+        <ul id="dinner-list" class="recipe-list mt-2"></ul>
+      </div>
+      <div class="category-card bg-white rounded-lg shadow p-6 cursor-pointer hover:bg-red-100 transition">
+        <h2 class="text-xl font-semibold mb-2">Snack</h2>
+        <p>Discover easy and delicious snack options.</p>
+        <ul id="snack-list" class="recipe-list mt-2"></ul>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -196,5 +218,6 @@
   <script src="sample.js"></script>
   <script src="loginform.js"></script>
   <script src="profile.js"></script>
+  <script src="categoryFetch.js"></script>
 </body>
 </html>
