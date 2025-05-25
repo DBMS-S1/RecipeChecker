@@ -1,200 +1,167 @@
-/* Loading screen and truck animation styles */
-.loader {
-  width: 100vw;
-  height: 100vh;
+/* Recipe list styles */
+.recipe-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recipe-list-item {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.recipe-list-item:last-child {
+  border-bottom: none;
+}
+
+.recipe-list-item:hover,
+.recipe-list-item:focus {
+  background-color: #e53e3e;
+  color: white;
+  outline: none;
+}
+
+/* Back button */
+.back-button {
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover,
+.back-button:focus {
+  background-color: #9b2c2c;
+  outline: none;
+}
+
+/* Recipe details */
+#recipes-container h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+#recipes-container p {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: #4a5568;
+  margin-bottom: 0.75rem;
+}
+
+#recipes-container p strong {
+  color: #2c3e50;
+}
+
+/* Form input and button improvements */
+section[aria-label="Recipe search"] input[type="text"],
+section[aria-label="Recipe search"] input[type="number"],
+section[aria-label="Recipe search"] select {
+  border: 2px solid #e53e3e;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  font-size: 1.125rem;
+  color: #2c3e50;
+  background-color: #fff;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+section[aria-label="Recipe search"] input[type="text"]:focus,
+section[aria-label="Recipe search"] input[type="number"]:focus,
+section[aria-label="Recipe search"] select:focus {
+  outline: none;
+  border-color: #9b2c2c;
+  box-shadow: 0 0 8px rgba(155, 44, 44, 0.6);
+}
+
+section[aria-label="Recipe search"] button#find-recipes {
+  background-color: #e53e3e;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 6px 18px rgba(229, 62, 62, 0.7);
+}
+
+section[aria-label="Recipe search"] button#find-recipes:hover,
+section[aria-label="Recipe search"] button#find-recipes:focus {
+  background-color: #9b2c2c;
+  outline: none;
+  box-shadow: 0 8px 24px rgba(155, 44, 44, 0.9);
+}
+
+/* Popup overlay and modal container adjustments to show background image */
+#recipe-popup {
+  display: none; /* default hidden */
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent dark overlay */
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-  z-index: 3000;
+  z-index: 10000;
+  transition: opacity 0.3s ease;
 }
 
-.truckWrapper {
-  width: 200px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
+#recipe-popup.show {
+display: flex;
+opacity: 1;
+}
+
+#recipe-popup > div {
+  background-color: rgba(255, 255, 255, 0.95); /* slightly transparent white */
+  border-radius: 1rem;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
   position: relative;
-  align-items: center;
-  justify-content: flex-end;
-  overflow-x: hidden;
-}
-/* truck upper body */
-.truckBody {
-  width: 130px;
-  height: fit-content;
-  margin-bottom: 6px;
-  animation: motion 1s linear infinite;
-}
-/* truck suspension animation*/
-@keyframes motion {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(3px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-/* truck's tires */
-.truckTires {
-  width: 130px;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 10px 0px 15px;
-  position: absolute;
-  bottom: 0;
-}
-.truckTires svg {
-  width: 24px;
+  margin: auto;
 }
 
-.road {
-  width: 100%;
-  height: 1.5px;
-  background-color: #282828;
-  position: relative;
-  bottom: 0;
-  align-self: flex-end;
-  border-radius: 3px;
-}
-.road::before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 100%;
-  background-color: #282828;
-  right: -50%;
-  border-radius: 3px;
-  animation: roadAnimation 1.4s linear infinite;
-  border-left: 10px solid white;
-}
-.road::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 100%;
-  background-color: #282828;
-  right: -65%;
-  border-radius: 3px;
-  animation: roadAnimation 1.4s linear infinite;
-  border-left: 4px solid white;
+/* Close button */
+#close-popup {
+position: absolute;
+top: 1rem;
+right: 1rem;
+background: none;
+border: none;
+font-size: 2rem;
+color: #666;
+cursor: pointer;
+transition: color 0.3s ease;
 }
 
-.lampPost {
-  position: absolute;
-  bottom: 0;
-  right: -90%;
-  height: 90px;
-  animation: roadAnimation 1.4s linear infinite;
+#close-popup:hover,
+#close-popup:focus {
+color: #e53e3e;
+outline: none;
 }
 
-@keyframes roadAnimation {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-350px);
-  }
-}
-
-.nav-button,
-.header_button {
-  font-size: 13px;
-  color: #e1e1e1;
-  font-family: inherit;
-  font-weight: 500;
-  cursor: pointer;
-  position: relative;
-  border: none;
-  background: none;
-  text-transform: none;
-  line-height: 1.2;
-  white-space: nowrap;
-  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition-duration: 400ms;
-  transition-property: color;
-  padding: 0 0.5rem;
-  margin-right: 0.5rem;
-}
-
-.nav-button:last-child {
-  margin-right: 0;
-}
-
-.nav-button:not(:last-child)::before {
-  content: "";
-  position: absolute;
-  top: 20%;
-  right: -0.5rem;
-  width: 1px;
-  height: 60%;
-  background-color: #e1e1e1;
-}
-
-.nav-button:focus,
-.nav-button:hover,
-.header_button:focus,
-.header_button:hover {
-  color: #fff;
-}
-
-.nav-button:focus:after,
-.nav-button:hover:after,
-.header_button:focus:after,
-.header_button:hover:after {
-  width: 100%;
-  left: 0%;
-}
-
-.nav-button:after,
-.header_button:after {
-  content: "";
-  pointer-events: none;
-  bottom: -2px;
-  left: 50%;
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background-color: #fff;
-  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition-duration: 400ms;
-  transition-property: width, left;
-}
-
-.header_button:focus,
-.header_button:hover {
-  color: #fff;
-}
-
-.header_button:focus:after,
-.header_button:hover:after {
-  width: 100%;
-  left: 0%;
-}
-
-.header_button:after {
-  content: "";
-  pointer-events: none;
-  bottom: -2px;
-  left: 50%;
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background-color: #fff;
-  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition-duration: 400ms;
-  transition-property: width, left;
-}
-
-/* Background image for entire page */
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -205,118 +172,3 @@ body {
   background-repeat: no-repeat;
   color: #333;
 }
-
-/* Recipe Search Section Improvements */
-section[aria-label="Recipe search"] {
-  background-color: #fff;
-  padding: 2.5rem 2rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  width: 100%;
-  max-width: 650px;
-  margin: 0 auto 2.5rem auto;
-  transition: box-shadow 0.3s ease;
-}
-
-section[aria-label="Recipe search"]:hover {
-  box-shadow: 0 12px 36px rgba(0,0,0,0.25);
-}
-
-section[aria-label="Recipe search"] .text-center p {
-  font-size: 1.375rem;
-  font-weight: 700;
-  margin-bottom: 1.25rem;
-  color: #2c3e50;
-  letter-spacing: 0.02em;
-}
-
-section[aria-label="Recipe search"] input[type="text"],
-section[aria-label="Recipe search"] input[type="number"],
-section[aria-label="Recipe search"] select {
-  border: 1.5px solid #cbd5e0;
-  border-radius: 0.5rem;
-  padding: 0.65rem 1rem;
-  width: 100%;
-  max-width: 100%;
-  font-size: 1.125rem;
-  color: #2c3e50;
-  background-color: #f9fafb;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  position: relative;
-}
-
-section[aria-label="Recipe search"] input[type="text"]:focus,
-section[aria-label="Recipe search"] input[type="number"]:focus,
-section[aria-label="Recipe search"] select:focus {
-  outline: none;
-  border-color: #e53e3e;
-  box-shadow: 0 0 8px rgba(229, 62, 62, 0.6);
-}
-
-section[aria-label="Recipe search"] label {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #4a5568;
-  display: block;
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.01em;
-}
-
-section[aria-label="Recipe search"] button#find-recipes {
-  background-color: #e53e3e;
-  color: white;
-  padding: 0.85rem 2rem;
-  font-size: 1.25rem;
-  font-weight: 800;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  max-width: 100%;
-  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.5);
-}
-
-section[aria-label="Recipe search"] button#find-recipes:hover,
-section[aria-label="Recipe search"] button#find-recipes:focus {
-  background-color: #9b2c2c;
-  outline: none;
-  box-shadow: 0 6px 18px rgba(155, 44, 44, 0.7);
-}
-
-/* Custom select arrow */
-section[aria-label="Recipe search"] select {
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%23333%22/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 10px 7px;
-  padding-right: 2.5rem;
-}
-
-/* Responsive improvements */
-@media (max-width: 640px) {
-  section[aria-label="Recipe search"] {
-    padding: 1.5rem 1rem;
-    width: 90%;
-  }
-  section[aria-label="Recipe search"] .text-center p {
-    font-size: 1.25rem;
-  }
-  section[aria-label="Recipe search"] button#find-recipes {
-    font-size: 1.125rem;
-    padding: 0.75rem 1.25rem;
-  }
-}
-
- .contributor-header-image {
-            width: 250px;
-            height: auto;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 1.5rem;
- }

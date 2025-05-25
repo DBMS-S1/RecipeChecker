@@ -265,6 +265,50 @@ app.get('/api/recipes', async (req, res) => {
   }
 });
 
+// New POST endpoint to submit a recipe
+app.post('/api/recipes', async (req, res) => {
+  try {
+    const {
+      recipe_name,
+      category,
+      preparation_time,
+      cooking_time,
+      serving_size,
+      ingredients,
+      instructions,
+      allergen
+    } = req.body;
+
+    if (!recipe_name || !category || !preparation_time || !cooking_time || !serving_size || !ingredients || !instructions) {
+      return res.status(400).json({ message: 'Missing required recipe fields.' });
+    }
+
+    // Create a new recipe object
+    const newRecipe = {
+      recipe_name,
+      category,
+      preparation_time,
+      cooking_time,
+      serving_size,
+      ingredients,
+      instructions,
+      allergen: allergen || 'None'
+    };
+
+    // Create a new document with the recipe inside the 'recipes' array
+    const recipeDoc = new RecipeContainer({
+      recipes: [newRecipe]
+    });
+
+    await recipeDoc.save();
+
+    res.status(201).json({ message: 'Recipe submitted successfully.' });
+  } catch (error) {
+    console.error('Error submitting recipe:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

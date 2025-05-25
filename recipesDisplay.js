@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const recipesContainer = document.getElementById('recipes-container');
   const closePopupBtn = document.getElementById('close-popup');
 
+  // Hide popup on page load to prevent it from showing by default
+  if (recipesPopup) {
+    recipesPopup.style.display = 'none';
+    recipesPopup.classList.remove('show');
+  }
+
   // Function to fetch and display recipes
   async function fetchAndDisplayRecipes() {
     const maxServingSize = servingSizeSelect.value;
@@ -81,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Show popup if exists
       if (recipesPopup) {
         recipesPopup.style.display = 'flex'; // Use flex to match CSS
+        recipesPopup.classList.add('show');
       } else {
         console.warn('recipesPopup element not found');
       }
@@ -97,7 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to display full recipe details
   function displayRecipeDetails(recipe) {
-    if (!recipesContainer) return;
+    if (!recipesContainer) {
+      console.error('recipesContainer element not found');
+      return;
+    }
+
+    console.log('Displaying recipe details for:', recipe.recipe_name);
 
     recipesContainer.innerHTML = `
       <button id="back-to-list" aria-label="Back to recipe list" class="back-button">Back to list</button>
@@ -115,8 +127,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const backBtn = document.getElementById('back-to-list');
     if (backBtn) {
       backBtn.addEventListener('click', () => {
+        console.log('Back to list button clicked');
+        if (recipesPopup) {
+          recipesPopup.style.display = 'flex';
+          recipesPopup.classList.add('show');
+        }
         fetchAndDisplayRecipes();
       });
+    } else {
+      console.warn('Back to list button not found');
     }
   }
 
@@ -135,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closePopupBtn.addEventListener('click', () => {
       if (recipesPopup) {
         recipesPopup.style.display = 'none';
+        recipesPopup.classList.remove('show');
       }
     });
   }
