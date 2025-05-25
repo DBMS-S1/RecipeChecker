@@ -154,6 +154,7 @@ section.bg-transparent.py-12 a.bg-black:focus {
   color: #2c3e50;
 }
 
+
 /* Form input and button improvements */
 section[aria-label="Recipe search"] input[type="text"],
 section[aria-label="Recipe search"] input[type="number"],
@@ -338,6 +339,16 @@ nav[role="navigation"] {
 
 .truckTires svg {
   width: 24px;
+  animation: tireRotation 1s linear infinite;
+}
+
+@keyframes tireRotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .road {
