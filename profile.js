@@ -78,11 +78,32 @@ document.addEventListener('DOMContentLoaded', () => {
             let avatarUrl = user.avatar && user.avatar.trim() !== '' ? user.avatar : defaultAvatar;
             console.log('Avatar string received:', avatarUrl);
             if (!avatarUrl || avatarUrl.endsWith('/undefined.jpg') || avatarUrl.includes('/uploads/undefined.jpg') || avatarUrl.startsWith('/uploads/')) {
+              console.warn('Invalid avatar URL detected, using default avatar:', avatarUrl);
               avatarUrl = defaultAvatar;
             }
-            // If avatar is base64 string, convert to data URL
+            // Validate if avatarUrl is a valid URL or base64 string
+            const isValidUrl = (str) => {
+              try {
+                new URL(str);
+                return true;
+              } catch (_) {
+                return false;
+              }
+            };
+            const isBase64 = (str) => {
+              // Basic base64 validation regex
+              return typeof str === 'string' && /^[A-Za-z0-9+/=]+$/.test(str);
+            };
             if (avatarUrl && !avatarUrl.startsWith('http') && !avatarUrl.startsWith('data:')) {
-              avatarUrl = `data:image/png;base64,${avatarUrl}`;
+              if (isBase64(avatarUrl)) {
+                avatarUrl = `data:image/png;base64,${avatarUrl}`;
+              } else {
+                console.warn('Avatar string is not a valid base64 string:', avatarUrl);
+                avatarUrl = defaultAvatar;
+              }
+            } else if (avatarUrl && !isValidUrl(avatarUrl) && !avatarUrl.startsWith('data:')) {
+              console.warn('Avatar URL is not valid, using default avatar:', avatarUrl);
+              avatarUrl = defaultAvatar;
             }
             if (avatarImg) {
               avatarImg.src = avatarUrl;
