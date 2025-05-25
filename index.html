@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Good Recipe, Great Recipe</title>
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="loginform.css"/>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="loginform.css" />
+    <link rel="stylesheet" href="profile.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="text-center font-roboto">
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
@@ -273,7 +273,7 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
     </div>
   </section>
 
-   <!-- Navigation Bar -->
+  <!-- Navigation Bar -->
   <nav class="bg-red-700 text-white p-4" role="navigation" aria-label="Main navigation">
     <div class="container mx-auto flex justify-between items-center">
       <div class="flex">
@@ -295,9 +295,19 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
         </button>
       </div>
       <div class="flex items-center gap-4">
+        <button id="openLogin" class="header_button" aria-label="Login" tabindex="0">
+          <i class="fas fa-sign-in-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Login
+        </button>
+        <button id="openSignup" class="header_button" aria-label="Sign Up" tabindex="0">
+          <i class="fas fa-user-plus inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Sign Up
+        </button>
         <div id="profile-info" class="flex items-center gap-2 cursor-pointer" tabindex="0" aria-label="User profile">
-          <img id="avatar-img" src="" alt="User Avatar" class="avatar-img" />
-          <span id="username-display" class="text-white font-semibold"></span>
+          <a href="profile.html" class="flex items-center gap-2 no-underline text-white">
+            <img id="avatar-img" src="" alt="User Avatar" class="avatar-img" />
+            <span id="username-display" class="text-white font-semibold"></span>
+          </a>
         </div>
         <button id="logoutBtn" class="header_button" aria-label="Logout" tabindex="0">
           <i class="fas fa-sign-out-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
@@ -402,5 +412,7 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
   <script src="sample.js"></script>
   <script src="loginform.js"></script>
   <script src="recipesDisplay.js"></script>
+  <script src="profile.js"></script>
+  <script src="debugProfile.js"></script>
 </body>
 </html>

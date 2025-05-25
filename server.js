@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  avatar: { type: String, default: '' }, // New avatar field to store image URL or base64
+  avatar: { type: Buffer, default: null }, // Store avatar image as binary data
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -149,16 +149,25 @@ app.post('/api/upload-avatar', upload.single('avatar'), async (req, res) => {
     return res.status(400).json({ message: 'Identifier and avatar file are required.' });
   }
   try {
-    const avatarUrl = `/uploads/${req.file.filename}`;
+    // Read file buffer
+    const fileBuffer = fs.readFileSync(req.file.path);
+
+    // Update user avatar with binary data
     const user = await User.findOneAndUpdate(
       { $or: [{ username: identifier }, { email: identifier }] },
-      { avatar: avatarUrl },
+      { avatar: fileBuffer },
       { new: true }
     );
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
-    return res.status(200).json({ message: 'Avatar uploaded successfully.', avatar: avatarUrl });
+
+    // Remove uploaded file after saving to DB
+    fs.unlinkSync(req.file.path);
+
+    // Convert avatar Buffer to base64 string for response
+    const avatarBase64 = user.avatar ? user.avatar.toString('base64') : null;
+    return res.status(200).json({ message: 'Avatar uploaded successfully.', avatar: avatarBase64 });
   } catch (error) {
     console.error('Avatar upload error:', error);
     return res.status(500).json({ message: 'Server error.' });
@@ -240,7 +249,16 @@ app.get('/api/user-profile', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
-    return res.status(200).json({ user });
+    // Convert avatar Buffer to base64 string if present
+    let avatarBase64 = null;
+    if (user.avatar && user.avatar.length > 0) {
+      avatarBase64 = user.avatar.toString('base64');
+    }
+    return res.status(200).json({ user: {
+      username: user.username,
+      email: user.email,
+      avatar: avatarBase64
+    }});
   } catch (error) {
     console.error('Get user profile error:', error);
     return res.status(500).json({ message: 'Server error.' });
