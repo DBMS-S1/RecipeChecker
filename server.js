@@ -95,7 +95,7 @@ app.post('/api/signup', async (req, res) => {
 
 // Update profile endpoint
 app.put('/api/update-profile', async (req, res) => {
-  const { username, email, password, newUsername } = req.body;
+  const { username, email, password, newUsername, avatar } = req.body;
   if (!username) {
     return res.status(400).json({ message: 'Current username is required.' });
   }
@@ -104,6 +104,19 @@ app.put('/api/update-profile', async (req, res) => {
     if (email) updateData.email = email;
     if (password) updateData.password = password;
     if (newUsername) updateData.username = newUsername;
+
+    // Log avatar value for debugging
+    console.log('Received avatar in update-profile:', avatar);
+
+    // Validate avatar: must be Buffer or null, reject string paths
+    if (avatar) {
+      if (typeof avatar === 'string') {
+        console.warn('Rejected avatar update with string path:', avatar);
+        return res.status(400).json({ message: 'Invalid avatar format.' });
+      } else {
+        updateData.avatar = avatar;
+      }
+    }
 
     const updatedUser = await User.findOneAndUpdate(
       { username: username },
@@ -143,12 +156,30 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Cleanup endpoint to reset invalid avatar fields
+app.post('/api/cleanup-avatars', async (req, res) => {
+  try {
+    const result = await User.updateMany(
+      { avatar: { $type: 'string' } },
+      { $set: { avatar: null } }
+    );
+    return res.status(200).json({ message: 'Avatar cleanup completed.', modifiedCount: result.modifiedCount });
+  } catch (error) {
+    console.error('Avatar cleanup error:', error);
+    return res.status(500).json({ message: 'Server error during avatar cleanup.' });
+  }
+});
+
 app.post('/api/upload-avatar', upload.single('avatar'), async (req, res) => {
   const identifier = req.body.identifier;
   if (!identifier || !req.file) {
     return res.status(400).json({ message: 'Identifier and avatar file are required.' });
   }
   try {
+    // Log identifier and file info for debugging
+    console.log('Upload avatar request for identifier:', identifier);
+    console.log('Uploaded file:', req.file);
+
     // Read file buffer
     const fileBuffer = fs.readFileSync(req.file.path);
 
@@ -286,6 +317,24 @@ app.delete('/api/delete-avatar', async (req, res) => {
 
 app.get('/test', (req, res) => {
   res.json({ status: 'working', timestamp: new Date() });
+});
+
+// Delete account endpoint
+app.delete('/api/delete-account', async (req, res) => {
+  const { identifier } = req.body;
+  if (!identifier) {
+    return res.status(400).json({ message: 'Identifier is required.' });
+  }
+  try {
+    const deletedUser = await User.findOneAndDelete({ $or: [{ username: identifier }, { email: identifier }] });
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+    return res.status(200).json({ message: 'Account deleted successfully.' });
+  } catch (error) {
+    console.error('Delete account error:', error);
+    return res.status(500).json({ message: 'Server error.' });
+  }
 });
 
 // Start server

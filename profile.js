@@ -368,4 +368,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize profile on page load
   loadProfile();
+
+  // Delete account button functionality
+  const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+  if (deleteAccountBtn) {
+    deleteAccountBtn.addEventListener('click', async () => {
+      if (!confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        return;
+      }
+      const identifier = localStorage.getItem('email') || localStorage.getItem('username');
+      if (!identifier) {
+        alert('You must be logged in to delete your account.');
+        return;
+      }
+      try {
+        const response = await fetch('https://recipechecker.onrender.com/api/delete-account', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ identifier })
+        });
+        const data = await response.json();
+        if (response.ok) {
+          alert('Account deleted successfully.');
+          localStorage.clear();
+          window.location.href = 'index.html';
+        } else {
+          alert('Error deleting account: ' + data.message);
+        }
+      } catch (error) {
+        alert('Error deleting account: ' + error.message);
+      }
+    });
+  }
 });
