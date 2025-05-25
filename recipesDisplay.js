@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (filters.excludedIngredients.length > 0) queryParams.append('excludedIngredients', filters.excludedIngredients.join(','));
 
       // Use explicit backend URL with correct port 5000
-      const response = await fetch(`http://localhost:5000/api/recipes?${queryParams.toString()}`);
+      const response = await fetch(`https://recipechecker.onrender.com/api/recipes?${queryParams.toString()}`);
       const recipes = await response.json();
 
       console.log('Received recipes: ', recipes);
