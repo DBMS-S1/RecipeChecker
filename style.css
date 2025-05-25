@@ -5,6 +5,94 @@
   margin: 0;
 }
 
+/* Contributors page styles */
+.contributor-header-image {
+  max-width: 50%;
+  height: 50%;
+  margin: 0 auto 1rem auto;
+  display: block;
+}
+
+section.bg-transparent.py-12 > div.container {
+  text-align: center;
+}
+
+section.bg-transparent.py-12 h1 {
+  color: #b91c1c; /* Tailwind red-700 */
+  font-weight: 700;
+  text-align: center;
+}
+
+section.bg-transparent.py-12 p {
+  color: #c53030; /* Tailwind red-600 */
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section.bg-transparent.py-12 .grid > div {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+section.bg-transparent.py-12 .grid > div:hover,
+section.bg-transparent.py-12 .grid > div:focus-within {
+  background-color: #fef2f2; /* Tailwind red-50 */
+  transform: scale(1.05);
+}
+
+section.bg-transparent.py-12 .grid > div img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 50.5px 10.5px #d0d5d8;
+  margin-bottom: 1rem;
+}
+
+section.bg-transparent.py-12 h2 {
+  color: #b91c1c;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+section.bg-transparent.py-12 h3 {
+  color: #9b2c2c;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+section.bg-transparent.py-12 p.text-gray-400 {
+  color: #6b7280; /* Tailwind gray-500 */
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+section.bg-transparent.py-12 a.bg-black {
+  background-color: #000;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+section.bg-transparent.py-12 a.bg-black:hover,
+section.bg-transparent.py-12 a.bg-black:focus {
+  background-color: #1f2937; /* Tailwind gray-800 */
+  outline: none;
+}
+
 .recipe-list-item {
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #ddd;
@@ -171,4 +259,189 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   color: #333;
+}
+
+/* Navigation Bar */
+nav[role="navigation"] {
+  background-color: #b91c1c; /* Tailwind red-700 */
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+/* Loading Screen */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+}
+
+.loader {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.truckWrapper {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  overflow-x: hidden;
+}
+
+/* truck upper body */
+.truckBody {
+  width: 130px;
+  height: fit-content;
+  margin-bottom: 6px;
+  animation: motion 1s linear infinite;
+}
+
+/* truck suspension animation*/
+@keyframes motion {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* truck's tires */
+.truckTires {
+  width: 130px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px 0px 15px;
+  position: absolute;
+  bottom: 0;
+}
+
+.truckTires svg {
+  width: 24px;
+}
+
+.road {
+  width: 100%;
+  height: 1.5px;
+  background-color: #282828;
+  position: relative;
+  bottom: 0;
+  align-self: flex-end;
+  border-radius: 3px;
+}
+
+.road::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background-color: #282828;
+  right: -50%;
+  border-radius: 3px;
+  animation: roadAnimation 1.4s linear infinite;
+  border-left: 10px solid white;
+}
+
+.road::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #282828;
+  right: -65%;
+  border-radius: 3px;
+  animation: roadAnimation 1.4s linear infinite;
+  border-left: 4px solid white;
+}
+
+.lampPost {
+  position: absolute;
+  bottom: 0;
+  right: -90%;
+  height: 90px;
+  animation: roadAnimation 1.4s linear infinite;
+}
+
+@keyframes roadAnimation {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-350px);
+  }
+}
+
+nav[role="navigation"] .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav[role="navigation"] .nav-button,
+nav[role="navigation"] .header_button {
+  font-size: 18px;
+  color: #e1e1e1;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  margin: 0 0.5rem;
+  padding: 0.25rem 0.5rem;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+}
+
+nav[role="navigation"] .nav-button:focus,
+nav[role="navigation"] .nav-button:hover,
+nav[role="navigation"] .header_button:focus,
+nav[role="navigation"] .header_button:hover {
+  color: #fff;
+  outline: none;
+}
+
+nav[role="navigation"] .nav-button:focus:after,
+nav[role="navigation"] .nav-button:hover:after,
+nav[role="navigation"] .header_button:focus:after,
+nav[role="navigation"] .header_button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+nav[role="navigation"] .nav-button:after,
+nav[role="navigation"] .header_button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #fff;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
 }
