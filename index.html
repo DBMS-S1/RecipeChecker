@@ -273,44 +273,36 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
     </div>
   </section>
 
-  <!-- Navigation Bar -->
+   <!-- Navigation Bar -->
   <nav class="bg-red-700 text-white p-4" role="navigation" aria-label="Main navigation">
     <div class="container mx-auto flex justify-between items-center">
-    <div class="flex">
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='index.html'">
-        <i class="fas fa-search inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Recipe Search
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='categories.html'">
-        <i class="fas fa-th-large inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Categories
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='share.html'">
-        <i class="fas fa-share-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Share Recipe
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='contributors.html'">
-        <i class="fas fa-users inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Contributors
-      </button>
-    </div>
       <div class="flex">
-      <button id="openLogin" class="header_button" aria-label="Open Login form" tabindex="0">
-      <i class="fas fa-sign-in-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Login
-      </button>
-      <button id="openSignup" class="header_button" aria-label="Open Signup form" tabindex="0">
-      <i class="fas fa-user-plus inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Sign Up
-      </button>
-      <button id="profileBtn" class="header_button" aria-label="Profile" tabindex="0" style="display:none;" onclick="location.href='profile.html'">
-        <i class="fas fa-user-circle inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Profile
-      </button>
-      <button id="logoutBtn" class="header_button" aria-label="Logout" tabindex="0" style="display:none;">
-      <i class="fas fa-sign-out-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-      Logout
-      </button>
+        <button class="text-lg nav-button" tabindex="0" onclick="location.href='index.html'">
+          <i class="fas fa-search inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Recipe Search
+        </button>
+        <button class="text-lg nav-button" tabindex="0" onclick="location.href='categories.html'">
+          <i class="fas fa-th-large inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Categories
+        </button>
+        <button class="text-lg nav-button" tabindex="0" onclick="location.href='share.html'">
+          <i class="fas fa-share-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Share Recipe
+        </button>
+        <button class="text-lg nav-button" tabindex="0" onclick="location.href='contributors.html'">
+          <i class="fas fa-users inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Contributors
+        </button>
+      </div>
+      <div class="flex items-center gap-4">
+        <div id="profile-info" class="flex items-center gap-2 cursor-pointer" tabindex="0" aria-label="User profile">
+          <img id="avatar-img" src="" alt="User Avatar" class="avatar-img" />
+          <span id="username-display" class="text-white font-semibold"></span>
+        </div>
+        <button id="logoutBtn" class="header_button" aria-label="Logout" tabindex="0">
+          <i class="fas fa-sign-out-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Logout
+        </button>
       </div>
     </div>
   </nav>

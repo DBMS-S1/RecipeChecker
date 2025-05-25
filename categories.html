@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Good Recipe, Great Recipe</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="loginform.css"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -14,23 +15,23 @@
   <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to main content</a>
   <section class="home" aria-label="User login and signup forms" style="display: none" role="dialog" aria-modal="true" aria-labelledby="formTitle" aria-describedby="formDesc">
     <div class="form_container">
-      <i class="uil uil-times form_close" role="button" aria-label="Close form" tabindex="0"></i>
+      <i class="fas fa-times form_close" role="button" aria-label="Close form" tabindex="0"></i>
       <!-- Login Form -->
       <div class="form login_form" aria-hidden="false">
         <form id="loginForm" action="#" method="POST" novalidate>
           <h2 id="formTitle">Login</h2>
           <div class="input_box">
             <input
-              id="login_email"
-              name="email"
-              type="email"
-              placeholder="Enter your email"
+              id="login_identifier"
+              name="identifier"
+              type="text"
+              placeholder="Enter your username or email"
               required
               aria-required="true"
-              aria-label="Email address"
-              autocomplete="email"
+              aria-label="Username or Email address"
+              autocomplete="username"
             />
-            <i class="uil uil-envelope-alt email"></i>
+            <i class="uil uil-user-circle"></i>
           </div>
           <div class="input_box">
             <input
@@ -54,19 +55,32 @@
           <div class="option_field">
             <span class="checkbox">
               <input type="checkbox" id="remember_me" name="remember" />
-              <label for="remember_me">Remember me?</label>
+              <label for="remember_me">Remember me</label>
             </span>
             <a href="#" class="forgot_pw">Forgot password?</a>
           </div>
           <button type="submit" class="button" aria-live="polite"> Login Now </button>
-          <div class="login_signup"> Don't have an account? <a href="#" id="signup"> Sign Up </a>
+          <div class="login_signup"> Don't have an account? <a href="#" id="signup">&nbsp;Sign Up </a>
           </div>
         </form>
       </div>
       <!-- Signup Form -->
       <div class="form signup_form" aria-hidden="true">
         <form id="signupForm" action="#" method="POST" novalidate>
-          <h2 id="formDesc">Sign Up</h2>
+          <h2 id="formDesc"> Sign Up </h2>
+          <div class="input_box">
+            <input
+              id="signup_username"
+              name="username"
+              type="text"
+              placeholder="Enter your username"
+              required
+              aria-required="true"
+              aria-label="Username"
+              autocomplete="username"
+            />
+            <i class="uil uil-user-circle"></i>
+          </div>
           <div class="input_box">
             <input
               id="signup_email"
@@ -119,7 +133,7 @@
             ></i>
           </div>
           <button type="submit" class="button" aria-live="polite"> Sign Up Now </button>
-          <div class="login_signup"> Already have an account? <a href="#" id="login"> Login </a>
+          <div class="login_signup"> Already have an account?<a href="#" id="login">&nbsp;Login</a>
           </div>
         </form>
       </div>
@@ -129,41 +143,33 @@
   <!-- Navigation Bar -->
   <nav class="bg-red-700 text-white p-4" role="navigation" aria-label="Main navigation">
     <div class="container mx-auto flex justify-between items-center">
-    <div class="flex">
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='index.html'">
-        <i class="fas fa-search inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Recipe Search
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='categories.html'">
-        <i class="fas fa-th-large inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Categories
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='starred.html'">
-        <i class="fas fa-star inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Starred Recipes
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='planner.html'">
-        <i class="fas fa-calendar-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Meal Planner
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='share.html'">
-        <i class="fas fa-share-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Share Recipe
-      </button>
-      <button class="text-lg nav-button" tabindex="0" onclick="location.href='contributors.html'">
-        <i class="fas fa-users inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Contributors
-      </button>
-    </div>
       <div class="flex">
-      <button id="openLogin" class="header_button" aria-label="Open Login form" tabindex="0">
-      <i class="fas fa-sign-in-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Login
-      </button>
-      <button id="openSignup" class="header_button" aria-label="Open Signup form" tabindex="0">
-      <i class="fas fa-user-plus inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
-        Sign Up
-      </button>
+        <button class="text-lg nav-button" tabindex="0" onclick="location.href='index.html'">
+          <i class="fas fa-search inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Recipe Search
+        </button>
+        <button class="text-lg nav-button" tabindex="0" onclick="location.href='categories.html'">
+          <i class="fas fa-th-large inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Categories
+        </button>
+        <button class="text-lg nav-button" tabindex="0" onclick="location.href='share.html'">
+          <i class="fas fa-share-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Share Recipe
+        </button>
+        <button class="text-lg nav-button" tabindex="0" onclick="location.href='contributors.html'">
+          <i class="fas fa-users inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Contributors
+        </button>
+      </div>
+      <div class="flex items-center gap-4">
+        <div id="profile-info" class="flex items-center gap-2 cursor-pointer" tabindex="0" aria-label="User profile">
+          <img id="avatar-img" src="" alt="User Avatar" class="avatar-img" />
+          <span id="username-display" class="text-white font-semibold"></span>
+        </div>
+        <button id="logoutBtn" class="header_button" aria-label="Logout" tabindex="0">
+          <i class="fas fa-sign-out-alt inline-block mr-1 align-middle text-sm" aria-hidden="true"></i>
+          Logout
+        </button>
       </div>
     </div>
   </nav>

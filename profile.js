@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          identifier: currentEmail || currentUsername,
+          currentUsername: currentUsername,
           newUsername: newUsername !== currentUsername ? newUsername : undefined,
           email,
           password: currentPassword || undefined
