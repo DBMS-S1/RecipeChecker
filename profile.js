@@ -14,37 +14,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadProfile() {
     const username = localStorage.getItem('username') || 'User';
-    usernameDisplay.textContent = username;
+    const email = localStorage.getItem('email') || '';
+    usernameDisplay.textContent = email || username;
+
+    const defaultAvatar = 'https://raw.githubusercontent.com/DBMS-S1/RecipeChecker/main/Pictures/Default%20Picture.jpg';
 
     try {
-      const response = await fetch(`http://localhost:5000/api/user-profile?username=${encodeURIComponent(username)}`);
+      // Use email if available, else username
+      const identifier = email || username;
+      console.log('Fetching user profile with identifier:', identifier);
+      const response = await fetch(`https://recipechecker.onrender.com/api/user-profile?identifier=${encodeURIComponent(identifier)}`);
+      console.log('User profile fetch response status:', response.status);
       if (response.ok) {
         const data = await response.json();
         const user = data.user;
         if (user) {
-          avatarImg.src = user.avatar || 'Pictures/dex.png';
-          profileAvatar.src = user.avatar || 'Pictures/dex.png';
+          const avatarUrl = user.avatar && user.avatar.trim() !== '' ? user.avatar : defaultAvatar;
+          avatarImg.src = avatarUrl;
+          profileAvatar.src = avatarUrl;
           updateUsernameInput.value = user.username || username;
           updateEmailInput.value = user.email || '';
-          localStorage.setItem('avatar', user.avatar || 'Pictures/dex.png');
+          localStorage.setItem('avatar', avatarUrl);
+          localStorage.setItem('username', user.username);
+          localStorage.setItem('email', user.email);
         } else {
           // Fallback if user data missing
-          avatarImg.src = 'Pictures/dex.png';
-          profileAvatar.src = 'Pictures/dex.png';
+          avatarImg.src = defaultAvatar;
+          profileAvatar.src = defaultAvatar;
           updateUsernameInput.value = username;
           updateEmailInput.value = '';
         }
       } else {
         // Fallback if fetch failed
-        avatarImg.src = 'Pictures/dex.png';
-        profileAvatar.src = 'Pictures/dex.png';
+        avatarImg.src = defaultAvatar;
+        profileAvatar.src = defaultAvatar;
         updateUsernameInput.value = username;
         updateEmailInput.value = '';
       }
     } catch (error) {
       // Fallback if error
-      avatarImg.src = 'Pictures/dex.png';
-      profileAvatar.src = 'Pictures/dex.png';
+      avatarImg.src = defaultAvatar;
+      profileAvatar.src = defaultAvatar;
       updateUsernameInput.value = username;
       updateEmailInput.value = '';
     }
@@ -67,17 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const username = localStorage.getItem('username');
-      if (!username) {
+      const identifier = localStorage.getItem('username') || localStorage.getItem('email');
+      if (!identifier) {
         alert('You must be logged in to upload an avatar.');
         return;
       }
       const formData = new FormData();
       formData.append('avatar', file);
-      formData.append('username', username);
+      formData.append('identifier', identifier);
 
       try {
-        const response = await fetch('http://localhost:5000/api/upload-avatar', {
+        const response = await fetch('https://recipechecker.onrender.com/api/upload-avatar', {
           method: 'POST',
           body: formData
         });
@@ -98,18 +108,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Fallback to default avatar if image fails to load
+  avatarImg.onerror = () => {
+    avatarImg.src = 'https://raw.githubusercontent.com/DBMS-S1/RecipeChecker/main/Pictures/Default%20Picture.jpg';
+  };
+  profileAvatar.onerror = () => {
+    profileAvatar.src = 'https://raw.githubusercontent.com/DBMS-S1/RecipeChecker/main/Pictures/Default%20Picture.jpg';
+  };
+
   updateProfileForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const currentUsername = localStorage.getItem('username');
-    if (!currentUsername) {
+    const currentEmail = localStorage.getItem('email');
+    if (!currentUsername && !currentEmail) {
       alert('You must be logged in to update your profile.');
       return;
     }
 
     const newUsername = updateUsernameInput.value.trim();
     const email = updateEmailInput.value.trim();
-    const password = updatePasswordInput.value;
+    const currentPassword = updatePasswordInput.value;
     const confirmPassword = updateConfirmPasswordInput.value;
 
     // Email validation (same as loginform.js)
@@ -120,43 +139,74 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Password strength validation (same as loginform.js)
-    if (password) {
+    if (currentPassword) {
       const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-      if (!passwordRegex.test(password)) {
+      if (!passwordRegex.test(currentPassword)) {
         alert('Password must be at least 8 characters long and include at least one letter and one number.');
         return;
       }
     }
 
-    if (password !== confirmPassword) {
+    if (currentPassword !== confirmPassword) {
       alert('Passwords do not match.');
       return;
     }
 
+    // Verify current password correctness before update
+    if (currentPassword) {
+      try {
+      const verifyResponse = await fetch('https://recipechecker.onrender.com/api/verify-password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            identifier: currentEmail || currentUsername,
+            password: currentPassword
+          })
+        });
+        const verifyData = await verifyResponse.json();
+        if (!verifyResponse.ok) {
+          alert('Current password is incorrect.');
+          return;
+        }
+      } catch (error) {
+        alert('Error verifying current password: ' + error.message);
+        return;
+      }
+    }
+
     try {
-      const response = await fetch('/api/update-profile', {
+      const response = await fetch('https://recipechecker.onrender.com/api/update-profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: currentUsername,
+          identifier: currentEmail || currentUsername,
           newUsername: newUsername !== currentUsername ? newUsername : undefined,
           email,
-          password: password || undefined
+          password: currentPassword || undefined
         })
       });
       const data = await response.json();
       if (response.ok) {
         alert('Profile updated successfully.');
         localStorage.setItem('username', newUsername);
+        localStorage.setItem('email', email);
         // Optionally update avatar if changed elsewhere
         loadProfile();
       } else {
         alert('Error updating profile: ' + data.message);
+        // Preserve username and email input values on error
+        updateUsernameInput.value = updateUsernameInput.value;
+        updateEmailInput.value = updateEmailInput.value;
       }
     } catch (error) {
       alert('Error updating profile: ' + error.message);
+      // Preserve username and email input values on error
+      updateUsernameInput.value = updateUsernameInput.value;
+      updateEmailInput.value = updateEmailInput.value;
     }
   });
 
@@ -165,6 +215,40 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('username');
     localStorage.removeItem('avatar');
     window.location.href = 'index.html';
+  });
+
+  // Delete profile avatar on profile image click
+  profileAvatar.addEventListener('click', async () => {
+    if (!confirm('Are you sure you want to delete your profile picture?')) {
+      return;
+    }
+    const identifier = localStorage.getItem('email') || localStorage.getItem('username');
+    if (!identifier) {
+      alert('You must be logged in to delete your profile picture.');
+      return;
+    }
+    try {
+      const response = await fetch('https://recipechecker.onrender.com/api/delete-avatar', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ identifier })
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert('Profile picture deleted successfully.');
+        // Update avatar images to default
+        const defaultAvatar = 'https://raw.githubusercontent.com/DBMS-S1/RecipeChecker/main/Pictures/Default%20Picture.jpg';
+        avatarImg.src = defaultAvatar;
+        profileAvatar.src = defaultAvatar;
+        localStorage.setItem('avatar', defaultAvatar);
+      } else {
+        alert('Error deleting profile picture: ' + data.message);
+      }
+    } catch (error) {
+      alert('Error deleting profile picture: ' + error.message);
+    }
   });
 
   // Initialize profile on page load

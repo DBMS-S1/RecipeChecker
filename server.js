@@ -51,9 +51,9 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
-    // Use username + original extension as filename
+    // Use identifier + original extension as filename
     const ext = path.extname(file.originalname);
-    cb(null, req.body.username + ext);
+    cb(null, req.body.identifier + ext);
   }
 });
 
@@ -143,16 +143,15 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Upload avatar endpoint
 app.post('/api/upload-avatar', upload.single('avatar'), async (req, res) => {
-  const username = req.body.username;
-  if (!username || !req.file) {
-    return res.status(400).json({ message: 'Username and avatar file are required.' });
+  const identifier = req.body.identifier;
+  if (!identifier || !req.file) {
+    return res.status(400).json({ message: 'Identifier and avatar file are required.' });
   }
   try {
     const avatarUrl = `/uploads/${req.file.filename}`;
     const user = await User.findOneAndUpdate(
-      { username: username },
+      { $or: [{ username: identifier }, { email: identifier }] },
       { avatar: avatarUrl },
       { new: true }
     );
@@ -229,20 +228,40 @@ app.get('/api/recipes', async (req, res) => {
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Get user profile endpoint
 app.get('/api/user-profile', async (req, res) => {
-  const username = req.query.username;
-  if (!username) {
-    return res.status(400).json({ message: 'Username query parameter is required.' });
+  console.log('Received /api/user-profile request with query:', req.query);
+  const identifier = req.query.identifier;
+  console.log('Identifier:', identifier);
+  if (!identifier) {
+    return res.status(400).json({ message: 'Identifier query parameter is required.' });
   }
   try {
-    const user = await User.findOne({ username: username }).select('username email avatar');
+    const user = await User.findOne({ $or: [{ username: identifier }, { email: identifier }] }).select('username email avatar');
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
     return res.status(200).json({ user });
   } catch (error) {
     console.error('Get user profile error:', error);
+    return res.status(500).json({ message: 'Server error.' });
+  }
+});
+
+app.delete('/api/delete-avatar', async (req, res) => {
+  const { identifier } = req.body;
+  if (!identifier) {
+    return res.status(400).json({ message: 'Identifier is required.' });
+  }
+  try {
+    const user = await User.findOne({ $or: [{ username: identifier }, { email: identifier }] });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+    user.avatar = '';
+    await user.save();
+    return res.status(200).json({ message: 'Avatar deleted successfully.' });
+  } catch (error) {
+    console.error('Delete avatar error:', error);
     return res.status(500).json({ message: 'Server error.' });
   }
 });

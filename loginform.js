@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Signing up...';
 
-        fetch('http://localhost:5000/api/signup', {
+        fetch('https://recipechecker.onrender.com/api/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -258,7 +258,20 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
           alert(data.message);
           if (data.message === 'User created successfully.') {
-            home.style.display = 'none';
+            // Hide signup form and show login form
+            document.querySelector('.signup_form').setAttribute('aria-hidden', 'true');
+            document.querySelector('.login_form').setAttribute('aria-hidden', 'false');
+            formContainer.classList.remove('active');
+            home.style.display = 'flex';
+
+            // Pre-fill login form with signup credentials
+            const identifierInput = document.getElementById('login_identifier');
+            const passwordInput = document.getElementById('login_password');
+            identifierInput.value = usernameInput.value.trim();
+            passwordInput.value = passwordInput.value.trim();
+
+            // Focus on login identifier input
+            identifierInput.focus();
           }
           submitBtn.disabled = false;
           submitBtn.textContent = 'Sign Up Now';
@@ -304,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Logging in...';
 
-        fetch('http://localhost:5000/api/login', {
+        fetch('https://recipechecker.onrender.com/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -320,7 +333,16 @@ document.addEventListener('DOMContentLoaded', () => {
           if (data.message === 'Login successful.') {
             home.style.display = 'none';
             localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('username', identifierInput.value.trim());
+            const identifier = identifierInput.value.trim();
+            // Detect if identifier is email or username
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(identifier)) {
+              localStorage.setItem('email', identifier);
+              localStorage.removeItem('username');
+            } else {
+              localStorage.setItem('username', identifier);
+              localStorage.removeItem('email');
+            }
             // Optionally, fetch avatar URL from backend here and store in localStorage
             toggleAuthButtons();
           }
