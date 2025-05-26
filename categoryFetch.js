@@ -31,6 +31,31 @@ document.addEventListener('DOMContentLoaded', () => {
     recipePopup.style.display = 'none';
   });
 
+  // Check if user is logged in
+  function isLoggedIn() {
+    // Example check: presence of username in localStorage or sessionStorage
+    return !!localStorage.getItem('username') || !!sessionStorage.getItem('username');
+  }
+
+  // Show or hide categories based on login status
+  function updateCategoriesVisibility() {
+    const categoriesGrid = document.querySelector('.categories-grid');
+    if (isLoggedIn()) {
+      categoriesGrid.style.display = 'grid';
+    } else {
+      categoriesGrid.style.display = 'none';
+      alert('Please log in to view categories.');
+    }
+  }
+
+  // Listen for login status changes and auto-refresh categories visibility
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'username' && event.newValue) {
+      updateCategoriesVisibility();
+      fetchRecipes();
+    }
+  });
+
   // Fetch recipes from backend
   async function fetchRecipes() {
     try {
@@ -138,5 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  updateCategoriesVisibility();
   fetchRecipes();
 });
