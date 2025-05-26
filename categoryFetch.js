@@ -72,18 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Display recipes grouped by category, supporting multiple categories per recipe
-  function displayRecipesByCategory(recipes) {
+function displayRecipesByCategory(recipes) {
     // Clear existing lists
     breakfastList.innerHTML = '';
     lunchList.innerHTML = '';
     dinnerList.innerHTML = '';
     snackList.innerHTML = '';
 
+    // Track added recipes per category to prevent duplicates
+    const addedRecipes = {
+      Breakfast: new Set(),
+      Lunch: new Set(),
+      Dinner: new Set(),
+      Snack: new Set()
+    };
+
     recipes.forEach(recipe => {
       // Split category by slash, comma, or semicolon delimiters
       const categories = recipe.category ? recipe.category.split(/[\/,;]/).map(c => c.trim()) : ['Snack'];
 
       categories.forEach(category => {
+        // Prevent duplicates
+        if (addedRecipes[category] && addedRecipes[category].has(recipe.recipe_name)) {
+          return; // Skip duplicate
+        }
+
         const listItem = document.createElement('li');
         listItem.className = 'recipe-list-item';
         listItem.textContent = recipe.recipe_name;
@@ -104,16 +117,20 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (category) {
           case 'Breakfast':
             breakfastList.appendChild(listItem);
+            addedRecipes.Breakfast.add(recipe.recipe_name);
             break;
           case 'Lunch':
             lunchList.appendChild(listItem);
+            addedRecipes.Lunch.add(recipe.recipe_name);
             break;
           case 'Dinner':
             dinnerList.appendChild(listItem);
+            addedRecipes.Dinner.add(recipe.recipe_name);
             break;
           case 'Snack':
           default:
             snackList.appendChild(listItem);
+            addedRecipes.Snack.add(recipe.recipe_name);
             break;
         }
       });
